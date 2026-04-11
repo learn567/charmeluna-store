@@ -375,7 +375,7 @@ const handleSubscribe = async () => {
         </div>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1.2, delay: 1.5 }} className="w-full flex justify-center mt-[55px] relative z-10 px-4 md:px-12"><div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "400px" : "570px" }}><img src="/images/fst-banner.png" alt="First Banner" className="w-full h-full object-cover block" /></div></motion.div>
+      <motion.div initial={{ opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1.2, delay: 1.5 }} className="w-full flex justify-center mt-[55px] relative z-10 px-4 md:px-12"><div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "400px" : "570px" }}><img src="/images/fst-banner.webp" alt="First Banner" className="w-full h-full object-cover block" /></div></motion.div>
 
       <motion.div initial={hasSeenAnimation ? { opacity: 1 } : { opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={hasSeenAnimation ? { duration: 0 } : { duration: 1, delay: 1.7 }} className="w-full flex justify-center mt-[15px] mb-[30px] px-4 md:px-12"><div className="w-[95%] md:w-[1290px] max-w-[1280px] flex items-center rounded-[5px] bg-[#f1f0ed] shadow-sm overflow-hidden relative" style={{ height: isMobile ? "33px" : "35px" }}><motion.p animate={{ x: isMobile ? ["0px", "150px", "0px"] : ["0px", "1000px", "0px"] }} transition={{ repeat: Infinity, duration: isMobile ? 10 : 25, ease: "linear" }} style={{ fontFamily: 'Swiss, sans-serif', fontSize: isMobile ? "10px" : "13px", fontWeight: "600", color: "#67645e", textTransform: "uppercase", letterSpacing: "0.15em", marginLeft: isMobile ? "6px" : "10px", whiteSpace: "nowrap", display: "flex", alignItems: "center", height: "100%", position: "relative" }}>Glow starts here ✨</motion.p></div></motion.div>
 
@@ -447,41 +447,50 @@ const handleSubscribe = async () => {
     <div className="category-container border-b-[30px] border-transparent"> 
       
       {/* 1st: Eyes */}
-      <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
-        <Image 
-          src="/images/eyes-category.png" 
-          fill 
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
-  style={{ objectFit: 'cover' }} 
-          className="object-cover brightness-[0.6] transition-opacity duration-300 group-hover:opacity-0" 
-          alt="Eyes" 
-        />
-        <video
-          src="/images/eyes-makeup.mov"
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        />
-        <span className="relative z-20 uppercase tracking-[0.2em] text-center text-[22px]" 
-          style={{ fontFamily: "'UniversLTSd-Bold', sans-serif", fontWeight: "900", color: "#ffffff" }}>
-          Eyes
-        </span>
-      </div>
+<div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
+
+  <Image 
+    src="/images/eyescategory.webp" 
+    fill 
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+    style={{ objectFit: 'cover' }} 
+    className="object-cover brightness-[0.6] transition-opacity duration-300 group-hover:opacity-0" 
+    alt="Eyes" 
+  />
+  
+  <Image 
+    src="/images/eyeshover.webp" 
+    fill 
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+    style={{ objectFit: 'cover' }} 
+    className="absolute inset-0 object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" 
+    alt="Eyes Hover" 
+  />
+
+  <span className="relative z-20 uppercase tracking-[0.2em] text-center text-[22px]" 
+    style={{ fontFamily: "'UniversLTSd-Bold', sans-serif", fontWeight: "900", color: "#ffffff" }}>
+    Eyes
+  </span>
+</div>
 
       {/* 2nd: Lip Glow */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image 
-          src="/images/lipglow-category.JPG" 
+          src="/images/lipglowcategory.webp" 
           fill 
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
   style={{ objectFit: 'cover' }} 
           className="object-cover brightness-[0.6] transition-opacity duration-300 group-hover:opacity-0" 
           alt="Lip Glow" 
         />
-        <video
-          src="/images/lipglowmakeup.mp4"
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        />
+        <Image 
+    src="/images/lipglowhover.webp" 
+    fill 
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+    style={{ objectFit: 'cover' }} 
+    className="absolute inset-0 object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" 
+    alt="Lip Glow" 
+  />
         <span className="relative z-20 uppercase tracking-[0.2em] text-center text-[22px]" 
           style={{ fontFamily: "'UniversLTSd-Bold', sans-serif", fontWeight: "900", color: "#ffffff" }}>
           Lip Glow
@@ -491,7 +500,7 @@ const handleSubscribe = async () => {
       {/* 3rd: Lipstick */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image
-  src="/images/lipstick-category.png"
+  src="/images/lipstick-category.webp"
   alt="Lipstick Category"
   fill
   priority={true}  
@@ -499,11 +508,14 @@ const handleSubscribe = async () => {
   sizes="(max-width: 768px) 100vw, 50vw"
   style={{ objectFit: 'cover' }}
   className="object-cover brightness-[0.6] transition-opacity duration-300 group-hover:opacity-0" />
-        <video
-          src="/images/lipstickmakeup.mp4"
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        />
+        <Image 
+    src="/images/lipstickhover.webp" 
+    fill 
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+    style={{ objectFit: 'cover' }} 
+    className="absolute inset-0 object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" 
+    alt="Lipstick Hover" 
+  />
         <span className="relative z-20 uppercase tracking-[0.2em] text-center text-[22px]" 
           style={{ fontFamily: "'UniversLTSd-Bold', sans-serif", fontWeight: "900", color: "#ffffff" }}>
           Lipstick
@@ -513,18 +525,21 @@ const handleSubscribe = async () => {
       {/* 4th: Skin Toner */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image 
-          src="/images/skintoner-category.jpg" 
+          src="/images/skintonercategory.webp" 
           fill 
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
   style={{ objectFit: 'cover' }} 
           className="object-cover brightness-[0.6] transition-opacity duration-300 group-hover:opacity-0" 
           alt="Skin Toner" 
         />
-        <video
-          src="/images/skintonermakeup.mp4"
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        />
+        <Image 
+    src="/images/skintonerhover.webp" 
+    fill 
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+    style={{ objectFit: 'cover' }} 
+    className="absolute inset-0 object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" 
+    alt="Skin Toner Hover" 
+  />
         <span className="relative z-20 uppercase tracking-[0.2em] text-center text-[22px]" 
               style={{ fontFamily: "'UniversLTSd-Bold', sans-serif", fontWeight: "800", color: "#ffffff" }}>
           Skin Toner
@@ -534,18 +549,21 @@ const handleSubscribe = async () => {
       {/* 5th: Foundation */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image 
-          src="/images/foundation-category.JPG" 
+          src="/images/foundationcategory.webp" 
           fill 
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
   style={{ objectFit: 'cover' }} 
           className="object-cover brightness-[0.6] transition-opacity duration-300 group-hover:opacity-0" 
           alt="Foundation" 
         />
-        <video
-          src="/images/foundationmakeup.mp4"
-          autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        />
+        <Image 
+    src="/images/foundationhover.webp" 
+    fill 
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+    style={{ objectFit: 'cover' }} 
+    className="absolute inset-0 object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" 
+    alt="Foundation Hover" 
+  />
         <span className="relative z-20 uppercase tracking-[0.2em] text-center text-[22px]" 
               style={{ fontFamily: "'UniversLTSd-Bold', sans-serif", fontWeight: "900", color: "#ffffff" }}>
           Foundation
@@ -648,7 +666,7 @@ const handleSubscribe = async () => {
   }}
 >
     <Image 
-      src="/images/mission-section.png" 
+      src="/images/bgmission.webp" 
       alt="Our Mission" 
       fill 
       style={{ objectFit: 'cover' }} 
