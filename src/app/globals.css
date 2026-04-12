@@ -8,3 +8,7 @@ body {
   background-color: #ffffff;
   font-family: "PolySans", "Helvetica Neue", Arial, sans-serif;
 }
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
