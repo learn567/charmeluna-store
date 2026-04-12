@@ -105,48 +105,56 @@ const handleSubscribe = async () => {
 };
 
   useEffect(() => {
-    setIsMounted(true);
-    setWindowWidth(window.innerWidth);
+  setIsMounted(true);
+  document.body.style.overflow = 'hidden';
+  setWindowWidth(window.innerWidth);
+  
+  // Animation shuru hote hi scrolling lock kar do
+  document.body.style.overflow = 'hidden';
+
+  const fetchProducts = async () => {
+    const productNames = ['Lip Glow', 'Foundation', 'mascara', 'Lipstick', 'eyeliner', 'Skintoner', 'Skintoner2'];
+    const { data, error } = await supabase.from('products').select('*').in('name', productNames);
     
-    const fetchProducts = async () => {
-      const productNames = ['Lip Glow', 'Foundation', 'mascara', 'Lipstick', 'eyeliner', 'Skintoner', 'Skintoner2'];
-      const { data, error } = await supabase.from('products').select('*').in('name', productNames);
-      
-      if (data) {
-        const orderedData = productNames.map(name => data.find(p => p.name === name)).filter(Boolean); 
-        setProducts(orderedData);
-      }
-    };
-    fetchProducts();
+    if (data) {
+      const orderedData = productNames.map(name => data.find(p => p.name === name)).filter(Boolean); 
+      setProducts(orderedData);
+    }
+  };
+  fetchProducts();
 
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
+  const handleResize = () => setWindowWidth(window.innerWidth);
+  
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('scroll', handleScroll);
 
-    const tightTimer = setTimeout(() => setIsTight(true), 1200);
-    const finalTimer = setTimeout(() => setIsFinal(true), 3500);
-    const cornerTimer = setTimeout(() => {
-        setGoToCorner(true);
-        setHasSeenAnimation(true);
-    }, 6000);
+  const tightTimer = setTimeout(() => setIsTight(true), 1200);
+  const finalTimer = setTimeout(() => setIsFinal(true), 3500);
+  const cornerTimer = setTimeout(() => {
+    setGoToCorner(true);
+    setHasSeenAnimation(true);
+    // Door khul gaya, ab scroll allow karo
+    document.body.style.overflow = 'auto'; 
+}, 6000);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(tightTimer);
-      clearTimeout(finalTimer);
-      clearTimeout(cornerTimer);
-    };
-  }, []);
+  return () => {
+    window.removeEventListener('resize', handleResize);
+    window.removeEventListener('scroll', handleScroll);
+    clearTimeout(tightTimer);
+    clearTimeout(finalTimer);
+    clearTimeout(cornerTimer);
+    // Cleanup mein scroll hamesha on rakhein
+    document.body.style.overflow = 'auto';
+  };
+}, []);
 
   if (!isMounted) return null;
   const isMobile = windowWidth < 768;
@@ -375,9 +383,51 @@ const handleSubscribe = async () => {
         </div>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1.2, delay: 1.5 }} className="w-full flex justify-center mt-[55px] relative z-10 px-4 md:px-12"><div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "400px" : "570px" }}><img src="/images/fst-banner.webp" alt="First Banner" className="w-full h-full object-cover block" /></div></motion.div>
+      {goToCorner && (
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ duration: 1.5 }}
+        >
 
-      <motion.div initial={hasSeenAnimation ? { opacity: 1 } : { opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={hasSeenAnimation ? { duration: 0 } : { duration: 1, delay: 1.7 }} className="w-full flex justify-center mt-[15px] mb-[30px] px-4 md:px-12"><div className="w-[95%] md:w-[1290px] max-w-[1280px] flex items-center rounded-[5px] bg-[#f1f0ed] shadow-sm overflow-hidden relative" style={{ height: isMobile ? "33px" : "35px" }}><motion.p animate={{ x: isMobile ? ["0px", "150px", "0px"] : ["0px", "1000px", "0px"] }} transition={{ repeat: Infinity, duration: isMobile ? 10 : 25, ease: "linear" }} style={{ fontFamily: 'Swiss, sans-serif', fontSize: isMobile ? "10px" : "13px", fontWeight: "600", color: "#67645e", textTransform: "uppercase", letterSpacing: "0.15em", marginLeft: isMobile ? "6px" : "10px", whiteSpace: "nowrap", display: "flex", alignItems: "center", height: "100%", position: "relative" }}>Glow starts here ✨</motion.p></div></motion.div>
+          {/* 1. Banner Section (fst-banner.webp) */}
+          <motion.div initial={{ opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1.2, delay: 1.5 }} className="w-full flex justify-center mt-[55px] relative z-10 px-4 md:px-12">
+             <div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "400px" : "570px" }}>
+               <img src="/images/fst-banner.webp" alt="First Banner" className="w-full h-full object-cover block" />
+             </div>
+          </motion.div>
+
+          {/* 2. Marquee Text (Glow starts here) - Isko Banner ke niche paste karein */}
+<motion.div 
+  initial={hasSeenAnimation ? { opacity: 1 } : { opacity: 0 }} 
+  animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} 
+  transition={hasSeenAnimation ? { duration: 0 } : { duration: 1, delay: 0.3 }} 
+  className="w-full flex justify-center mt-[15px] mb-[30px] px-4 md:px-12"
+>
+  <div className="w-[95%] md:w-[1290px] max-w-[1280px] flex items-center rounded-[5px] bg-[#f1f0ed] shadow-sm overflow-hidden relative" style={{ height: isMobile ? "33px" : "35px" }}>
+    <motion.p 
+      animate={{ x: isMobile ? ["0px", "150px", "0px"] : ["0px", "1000px", "0px"] }} 
+      transition={{ repeat: Infinity, duration: isMobile ? 10 : 25, ease: "linear" }} 
+      style={{ 
+        fontFamily: 'Swiss, sans-serif', 
+        fontSize: isMobile ? "10px" : "13px", 
+        fontWeight: "600", 
+        color: "#67645e", 
+        textTransform: "uppercase", 
+        letterSpacing: "0.15em", 
+        marginLeft: isMobile ? "6px" : "10px", 
+        whiteSpace: "nowrap", 
+        display: "flex", 
+        alignItems: "center", 
+        height: "100%", 
+        position: "relative" 
+      }}
+    >
+      Glow starts here ✨
+    </motion.p>
+  </div>
+</motion.div>
+
 
       {/* --- PRODUCTS SLIDER SECTION --- */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={goToCorner ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ duration: 1, delay: 2 }} className="relative w-full flex justify-center py-20 pb-40">
@@ -940,7 +990,8 @@ const handleSubscribe = async () => {
           <div>© 2026 CHARMELUNA STORE. All rights reserved.</div>
         </div>
       </footer>
-
+      </motion.div>
+      )}
  </main>
   );
   
