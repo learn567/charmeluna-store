@@ -22,6 +22,9 @@ export default function Home() {
   const [email, setEmail] = useState("");
 const [message, setMessage] = useState("");
 const [loading, setLoading] = useState(false);
+const [searchTerm, setSearchTerm] = useState("");
+const [isSearchOpen, setIsSearchOpen] = useState(false);
+const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('mission');
   const missionContent = {
     mission: "To enhance, protect, and care for your skin today, so it naturally glows stronger and healthier over time",
@@ -279,7 +282,22 @@ const handleSubscribe = async () => {
                     <span style={{ color: "#67645e", fontSize: "14px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.2em" }}>Shop</span>
                     <motion.div animate={{ rotate: shopOpen ? 180 : 0 }} transition={{ duration: 0.3 }}><ChevronDown size={14} style={{ color: "#67645e" }} /></motion.div>
                   </div>
-                  <AnimatePresence>{shopOpen && (<motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} style={{ overflow: "hidden", display: "flex", flexDirection: "column", gap: "12px", paddingLeft: "10px", paddingTop: "15px" }}>{["Eye", "Skin Foundation", "Lip Glow", "Lipstick", "Skin Toner"].map((cat, i) => (<Link key={i} href="/" onClick={() => setIsOpen(false)} style={{ color: "rgba(103, 100, 94, 0.7)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.15em", textDecoration: "none" }}>{cat}</Link>))}</motion.div>)}</AnimatePresence>
+                  <AnimatePresence>{shopOpen && (<motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} style={{ overflow: "hidden", display: "flex", flexDirection: "column", gap: "12px", paddingLeft: "10px", paddingTop: "15px" }}>{[
+  { name: "Eye", path: "/shop/eye" },
+  { name: "Skin Foundation", path: "/shop/skin-foundation" },
+  { name: "Lip Glow", path: "/shop/lip-glow" },
+  { name: "Lipstick", path: "/shop/lipstick" },
+  { name: "Skin Toner", path: "/shop/skin-toner" }
+].map((cat, i) => (
+  <Link 
+    key={i} 
+    href={cat.path} 
+    onClick={() => setIsOpen(false)} 
+    style={{ color: "rgba(103, 100, 94, 0.7)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.15em", textDecoration: "none" }}
+  >
+    {cat.name}
+  </Link>
+))}</motion.div>)}</AnimatePresence>
                 </div>
                 <Link href="/about" onClick={() => setIsOpen(false)} style={{ color: "#67645e", fontSize: "14px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.2em", textDecoration: "none", borderBottom: "1px solid #f1f0ed", paddingBottom: "12px" }}>About</Link>
                 <Link href="/contact" onClick={() => setIsOpen(false)} style={{ color: "#67645e", fontSize: "14px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.2em", textDecoration: "none", borderBottom: "1px solid #f1f0ed", paddingBottom: "12px" }}>Contact</Link>
@@ -335,9 +353,21 @@ const handleSubscribe = async () => {
                       animate={{ opacity: 1, y: 0 }} 
                       className="bg-[#fef8fc] shadow-2xl rounded-[8px] border border-[#f1f0ed] flex flex-col items-center justify-center min-w-[190px] h-[260px] overflow-hidden p-2"
                     >
-                      {["Eye", "Skin Foundation", "Lip Glow", "Lipstick", "Skin Toner"].map((item, idx) => (
-                        <Link key={idx} href="/" className="w-full flex-1 flex items-center justify-center text-[#67645e] no-underline uppercase text-[11px] font-[600] tracking-[0.2em] transition-all duration-500 ease-out hover:tracking-[0.05em] hover:text-black hover:bg-[#ffffff]/50">{item}</Link>
-                      ))}
+                      {[
+  { name: "Eye", path: "/shop/eye" },
+  { name: "Skin Foundation", path: "/shop/skin-foundation" },
+  { name: "Lip Glow", path: "/shop/lip-glow" },
+  { name: "Lipstick", path: "/shop/lipstick" },
+  { name: "Skin Toner", path: "/shop/skin-toner" }
+].map((item, idx) => (
+  <Link 
+    key={idx} 
+    href={item.path} 
+    className="w-full flex-1 flex items-center justify-center text-[#67645e] no-underline uppercase text-[11px] font-[600] tracking-[0.2em] transition-all duration-500 ease-out hover:tracking-[0.05em] hover:text-black hover:bg-[#ffffff]/50"
+  >
+    {item.name}
+  </Link>
+))}
                     </motion.div>
                   </div>
                 </div>
@@ -376,9 +406,58 @@ const handleSubscribe = async () => {
             className="flex items-center z-[130] pointer-events-auto" 
             style={{ color: isScrolled ? "#67645e" : "#ffffff" }}
           >
-            <Search size={isMobile ? 18 : 20} className="mr-[10px] md:mr-[35px]" />
-            <User size={isMobile ? 18 : 20} className="mr-[10px] md:mr-[35px]" />
-            <ShoppingBag size={isMobile ? 18 : 20} />
+            {/* Updated Search UI with White Background */}
+<div className="flex items-center relative mr-[10px] md:mr-[35px]">
+  <AnimatePresence>
+    {isSearchOpen && (
+      <motion.div
+        initial={{ width: 0, opacity: 0 }}
+        animate={{ width: isMobile ? 180 : 320, opacity: 1 }}
+        exit={{ width: 0, opacity: 0 }}
+        className="absolute right-[35px] md:right-[50px] z-[150]"
+      >
+        <div className="relative flex items-center">
+          <input 
+            autoFocus 
+            type="text" 
+            placeholder="Search products..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                window.location.href = `/shop?search=${searchTerm}`;
+              }
+            }}
+            style={{ 
+              fontFamily: 'Swiss, sans-serif' 
+            }}
+            className="w-full h-[40px] bg-white border border-[#d3beab] rounded-full px-5 text-[13px] text-[#67645e] outline-none shadow-lg placeholder:text-[#67645e]/40" 
+          />
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+  <Search 
+    size={isMobile ? 18 : 20} 
+    className="cursor-pointer hover:scale-110 transition-transform duration-300" 
+    color={isScrolled ? "#67645e" : "#ffffff"} 
+    onClick={() => setIsSearchOpen(!isSearchOpen)} 
+  />
+</div>
+            <Link href="/account" className="mr-[10px] md:mr-[35px] flex items-center justify-center transition-transform duration-300 hover:scale-110">
+  <User 
+    size={isMobile ? 18 : 20} 
+    color={isScrolled ? "#67645e" : "#ffffff"} 
+  />
+</Link>
+            <div className="relative">
+  <ShoppingBag 
+    size={isMobile ? 18 : 20} 
+    className="cursor-pointer transition-colors duration-300 hover:opacity-70" 
+    color={isScrolled ? "#67645e" : "#ffffff"} 
+    onClick={() => setIsCartOpen(true)} 
+  />
+</div>
           </motion.div>
         </div>
       </motion.div>
@@ -390,6 +469,68 @@ const handleSubscribe = async () => {
           transition={{ duration: 1.5 }}
         >
 
+          {/* --- SIDE CART DRAWER --- */}
+<AnimatePresence>
+  {isCartOpen && (
+    <>
+      {/* Background Blur Overlay */}
+      <motion.div 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        exit={{ opacity: 0 }} 
+        onClick={() => setIsCartOpen(false)} 
+        className="fixed inset-0 bg-black/20 z-[999] backdrop-blur-[2px]"
+      />
+
+      {/* Drawer Panel */}
+      <motion.div 
+  initial={{ x: "100%" }} 
+  animate={{ x: 0 }} 
+  exit={{ x: "100%" }} 
+  transition={{ type: "tween", duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} 
+  style={{ right: 0, left: 'auto' }} // Ye line zaroori hai right side fix karne ke liye
+  className="fixed top-0 right-0 h-full w-full max-w-[450px] bg-[#fef8fc] z-[1000] flex flex-col shadow-2xl"
+>
+        <div className="flex-1 flex flex-col p-6 md:p-10">
+          
+          {/* Header Section */}
+          <div className="flex justify-between items-start mb-12">
+            <div>
+              <h3 style={{ fontFamily: 'Swiss, sans-serif' }} className="text-[#8f645e] uppercase tracking-[0.3em] font-bold text-[14px]">
+                Your Bag
+              </h3>
+            </div>
+            <button 
+              onClick={() => setIsCartOpen(false)} 
+              className="p-1 hover:rotate-90 transition-transform duration-300"
+            >
+              <X size={24} className="text-[#8f645e] opacity-40 hover:opacity-100" />
+            </button>
+          </div>
+
+          {/* Empty State Section */}
+          <div className="flex-1 flex flex-col items-center justify-center border border-[#f1f0ed] rounded-[20px] bg-white/50 px-6 py-10 shadow-sm">
+            <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-inner border border-[#f1f0ed]">
+              <ShoppingBag size={20} className="text-[#d3beab]" />
+            </div>
+            
+            <p style={{ fontFamily: 'Gowun Batang, serif' }} className="text-[#8f645e] text-xl mb-4 italic text-center">
+              Your bag is currently empty
+            </p>
+            
+            <button 
+              onClick={() => setIsCartOpen(false)} 
+              className="w-full max-w-[240px] py-4 border border-[#67645e] text-[#8f645e] text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-[#67645e] hover:text-white transition-colors duration-300 rounded-full"
+            >
+              Shop Now
+            </button>
+          </div>
+
+        </div>
+      </motion.div>
+    </>
+  )}
+</AnimatePresence>
           {/* 1. Banner Section (fst-banner.webp) */}
           <motion.div initial={{ opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1.2, delay: 1.5 }} className="w-full flex justify-center mt-[55px] relative z-10 px-4 md:px-12">
              <div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "400px" : "570px" }}>
@@ -442,7 +583,7 @@ const handleSubscribe = async () => {
 
           <div className="overflow-hidden w-full">
             <div className="flex transition-transform duration-700 cubic-bezier(0.4, 0, 0.2, 1)" style={{ transform: `translateX(-${currentIndex * cardWidth}px)` }}>
-              {products.map((product, idx) => (
+              {products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())).map((product, idx) => (
                 <div key={product.id || idx} style={{ width: cardWidth, flexShrink: 0, display: 'flex', justifyContent: 'center' }}>
                     <ProductCard product={product} meta={productMeta[idx]} />
                 </div>
