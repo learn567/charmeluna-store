@@ -47,8 +47,15 @@ export default function Shop() {
                   {shopOpen && (
                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} style={{ display: "flex", flexDirection: "column", gap: "12px", paddingLeft: "10px", paddingTop: "15px", overflow: "hidden" }}>
                       {["Eye", "Skin Foundation", "Lip Glow", "Lipstick", "Skin Toner"].map((cat, i) => (
-                        <Link key={i} href="/" onClick={() => setIsOpen(false)} style={{ color: "rgba(103, 100, 94, 0.7)", fontSize: "11px", textTransform: "uppercase", textDecoration: "none" }}>{cat}</Link>
-                      ))}
+  <Link 
+    key={i} 
+    href={`/shop/${cat.toLowerCase().replace(/\s+/g, '-')}`} 
+    onClick={() => setIsOpen(false)} 
+    style={{ color: "rgba(103, 100, 94, 0.7)", fontSize: "11px", textTransform: "uppercase", textDecoration: "none" }}
+  >
+    {cat}
+  </Link>
+))}
                     </motion.div>
                   )}
                 </div>
@@ -96,11 +103,20 @@ export default function Shop() {
                   <Link href="/shop" className="uppercase tracking-[0.15em] no-underline text-inherit">Shop</Link>
                   <div className="absolute hidden group-hover:block top-full left-[-20px] pt-4 pointer-events-auto">
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-[#fef8fc] shadow-2xl rounded-[8px] border border-[#f1f0ed] flex flex-col items-center justify-center min-w-[190px] h-[260px] overflow-hidden p-2">
-                      {["Eye", "Skin Foundation", "Lip Glow", "Lipstick", "Skin Toner"].map((item, idx) => (
-                        <Link key={idx} href="/" className="w-full flex-1 flex items-center justify-center text-[#67645e] no-underline uppercase text-[11px] font-[600] tracking-[0.2em] transition-all duration-500 ease-out hover:tracking-[0.05em] hover:text-black hover:bg-[#ffffff]/50">
-                          {item}
-                        </Link>
-                      ))}
+                      {["Eye", "Skin Foundation", "Lip Glow", "Lipstick", "Skin Toner"].map((item, idx) => {
+  // Yahan hum path bana rahe hain: "Skin Foundation" ban jayega "/shop/skin-foundation"
+  const itemPath = `/shop/${item.toLowerCase().replace(/\s+/g, '-')}`;
+  
+  return (
+    <Link 
+      key={idx} 
+      href={itemPath} 
+      className="w-full flex-1 flex items-center justify-center text-[#67645e] no-underline uppercase text-[11px] font-[600] tracking-[0.2em] transition-all duration-500 ease-out hover:tracking-[0.05em] hover:text-black hover:bg-[#ffffff]/50"
+    >
+      {item}
+    </Link>
+  );
+})}
                     </motion.div>
                   </div>
                 </div>
