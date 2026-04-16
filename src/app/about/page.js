@@ -62,7 +62,7 @@ export default function About() {
   const isMobile = windowWidth < 768;
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#fef8fc" }}>
+    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#ffffff" }}>
       {/* Baaki aapka poora page content aur footer yahan aayega */}
       
       {/* 1. MOBILE SIDEBAR */}
