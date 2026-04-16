@@ -268,7 +268,7 @@ const handleSubscribe = async () => {
   );
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#fef8fc" }}>
+    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#ffffff" }}>
       
       <AnimatePresence>
         {isOpen && isMobile && (
