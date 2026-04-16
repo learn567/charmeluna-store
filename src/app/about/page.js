@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link"; 
-import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
+import { Search, User, ShoppingBag, Menu, X, ChevronDown, Droplets, Leaf, ShieldCheck, Rabbit, Scale, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { supabase } from "../../supabase";
 export default function About() {
+  // 1. States
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false); 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -13,6 +14,36 @@ export default function About() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  // Newsletter states
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // 2. Subscription Function
+  const handleSubscribe = async () => {
+    if (!email || !email.includes("@")) {
+      setMessage("Please enter a valid email.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const { error } = await supabase.from('subscribers').insert([{ email: email }]);
+      if (error) {
+        if (error.code === '23505') setMessage("You're already part of the community! ✨");
+        else setMessage("Something went wrong. Try again.");
+      } else {
+        setMessage("Welcome to the community! ✨");
+        setEmail("");
+      }
+    } catch (err) {
+      setMessage("Network error.");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setMessage(""), 4000);
+    }
+  };
+
+  // 3. Effects
   useEffect(() => {
     setIsMounted(true);
     setWindowWidth(window.innerWidth);
@@ -32,6 +63,7 @@ export default function About() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#fef8fc" }}>
+      {/* Baaki aapka poora page content aur footer yahan aayega */}
       
       {/* 1. MOBILE SIDEBAR */}
       <AnimatePresence>
@@ -266,7 +298,322 @@ export default function About() {
   </div>
 </section>
 
-  
+
+{/* 6. THE CHARME PROMISE SECTION (With Smooth Hover Animation) */}
+<section className="w-full py-[60px] md:py-[100px] overflow-hidden" style={{ backgroundColor: "#fef8fc" }}>
+  <div className="max-w-[1280px] mx-auto text-center px-[15px] md:px-12">
+    
+    {/* Heading Section */}
+    <div className="mb-10 md:mb-20 px-4">
+      <h2 
+        style={{ 
+          fontFamily: 'Swiss, sans-serif', 
+          fontSize: isMobile ? "20px" : "32px", 
+          fontWeight: "500", 
+          color: "#67645e", 
+          textTransform: "uppercase", 
+          letterSpacing: "0.25em" 
+        }}
+      >
+        The Charme Promise
+      </h2>
+      <p 
+        style={{ 
+          fontFamily: '"Gowun Batang", serif', 
+          fontSize: isMobile ? "13px" : "18px", 
+          fontStyle: "italic",
+          color: "#67645e", 
+          opacity: 0.8,
+          marginTop: "10px"
+        }}
+      >
+        Beauty built on trust, care, and purity.
+      </p>
+    </div>
+
+    {/* Grid System */}
+    <div 
+      style={{ 
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(3, 1fr)',
+        gap: isMobile ? '10px' : '40px',
+        width: '100%',
+        margin: '0 auto',
+        boxSizing: 'border-box'
+      }}
+    >
+      {[
+        { title: "Skin First Approach", desc: "Every formula is designed with skin safety as our top priority.", icon: <Droplets size={isMobile ? 22 : 32} strokeWidth={1} /> },
+        { title: "Clean Ingredients", desc: "We choose ingredients that are gentle, effective, and responsibly sourced.", icon: <Leaf size={isMobile ? 22 : 32} strokeWidth={1} /> },
+        { title: "Tested & Trusted", desc: "Each product goes through careful quality checks before reaching you.", icon: <ShieldCheck size={isMobile ? 22 : 32} strokeWidth={1} /> },
+        { title: "Cruelty Free Commitment", desc: "We believe beauty should never come at the cost of animals.", icon: <Rabbit size={isMobile ? 22 : 32} strokeWidth={1} /> },
+        { title: "Honest Beauty", desc: "What we claim is exactly what we deliver—no hidden promises.", icon: <Scale size={isMobile ? 22 : 32} strokeWidth={1} /> },
+        { title: "Customer Care", desc: "Your satisfaction and skin health guide every decision we make.", icon: <Heart size={isMobile ? 22 : 32} strokeWidth={1} /> }
+      ].map((item, idx) => (
+        <div 
+          key={idx}
+          className="transition-all duration-500 ease-out hover:-translate-y-3 hover:scale-[1.02] cursor-default"
+          style={{ 
+            backgroundColor: '#ffffff',
+            borderRadius: '12px',
+            border: '1px solid #f1f0ed',
+            padding: isMobile ? '20px 10px' : '40px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: isMobile ? '170px' : '280px',
+            boxShadow: "0 10px 30px -10px rgba(0,0,0,0.05)",
+            width: '100%',
+            boxSizing: 'border-box'
+          }}
+          // Hover shadow logic
+          onMouseEnter={(e) => {
+             e.currentTarget.style.boxShadow = "0 25px 50px -12px rgba(0,0,0,0.12)";
+             e.currentTarget.style.borderColor = "#d3beab";
+          }}
+          onMouseLeave={(e) => {
+             e.currentTarget.style.boxShadow = "0 10px 30px -10px rgba(0,0,0,0.05)";
+             e.currentTarget.style.borderColor = "#f1f0ed";
+          }}
+        >
+          {/* Icon Area - Hover animation for icon */}
+          <div className="transition-transform duration-500 hover:rotate-6" style={{ marginBottom: isMobile ? '12px' : '25px', color: '#d3beab' }}>
+            {item.icon}
+          </div>
+
+          <h3 
+            style={{ 
+              fontFamily: '"Gowun Batang", serif', 
+              fontSize: isMobile ? "12px" : "20px", 
+              fontWeight: "600", 
+              color: "#67645e", 
+              fontStyle: "italic",
+              marginBottom: "10px",
+              paddingBottom: "8px",
+              borderBottom: '1px solid #f1f0ed',
+              width: '80%',
+              textAlign: 'center'
+            }}
+          >
+            {item.title}
+          </h3>
+
+          <p 
+            style={{ 
+              fontFamily: 'Swiss, sans-serif', 
+              fontSize: isMobile ? "9.5px" : "14px", 
+              lineHeight: "1.4", 
+              color: "#67645e", 
+              opacity: 0.7,
+              maxWidth: "100%",
+              margin: '0 auto',
+              padding: '0 5px'
+            }}
+          >
+            {item.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* --- MODERN LUXURY FOOTER --- */}
+      <footer style={{ 
+        backgroundColor: '#fef8fc', 
+        color: '#644747', 
+        // Top padding kam kar di (isMobile ? 30px : 50px)
+        padding: isMobile ? '30px 20px 20px 20px' : '50px 80px 40px 80px', 
+        fontFamily: "'Swiss', sans-serif",
+        // Top margin ko 80px se gira kar 20px kar diya
+        marginTop: '02px', 
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Background Decorative Text (Luxury Touch) */}
+        {!isMobile && (
+          <div style={{
+            position: 'absolute',
+            bottom: '-10px',
+            right: '10px',
+            fontSize: '170px',
+            fontWeight: '900',
+            color: '#644747',
+            opacity: '0.06',
+            pointerEvents: 'none',
+            letterSpacing: '-0.02em'
+          }}>
+            CHARMELUNA
+          </div>
+        )}
+
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          maxWidth: '1300px', 
+          margin: '0 auto', 
+          gap: isMobile ? '40px 0px' : '40px',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          
+          {/* 1. BRAND INITIALS & STORY */}
+          <div style={{ flex: isMobile ? '1 1 100%' : '1 1 350px', marginBottom: isMobile ? '20px' : '0' }}>
+            <div style={{ 
+    fontSize: '42px', 
+    fontWeight: '900', 
+    fontFamily: '"Gowun Batang", serif', 
+    color: '#644747', 
+    marginBottom: '15px',
+    lineHeight: '1'
+  }}>
+    CL<span style={{ color: '#b3848f', fontSize: '50px' }}>.</span>
+  </div>
+  <p style={{ fontSize: '14px', opacity: '0.7', color: '#644747' }}>
+    Elevating the standard of beauty through mindful ingredients and iconic design.
+  </p>
+</div>
+
+          {/* 2 & 3. COMBINED LINKS CONTAINER FOR MOBILE SIDE-BY-SIDE */}
+          <div style={{ 
+            display: 'flex', 
+            flex: isMobile ? '1 1 100%' : '1 1 400px', 
+            gap: isMobile ? '0' : '80px',
+            justifyContent: 'space-between'
+          }}>
+            {/* SHOP SECTION */}
+  <div style={{ flex: '1' }}>
+    <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Shop</h3>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      
+      {/* 1. Lipstick -> /shop/lipstick */}
+      <Link href="/shop/lipstick" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lipstick</Link>
+      
+      {/* 2. Foundation -> /shop/skin-foundation */}
+      <Link href="/shop/skin-foundation" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Foundation</Link>
+      
+      {/* 3. Eyes -> /shop/eye */}
+      <Link href="/shop/eye" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Eyes</Link>
+      
+      {/* 4. Lip Glow -> /shop/lip-glow */}
+      <Link href="/shop/lip-glow" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lip Glow</Link>
+      
+      {/* 5. Skin Toner -> /shop/skin-toner */}
+      <Link href="/shop/skin-toner" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Skin Toner</Link>
+      
+    </div>
+  </div>
+
+            {/* SUPPORT SECTION */}
+<div style={{ flex: '1' }}>
+  <h3 style={{ 
+    fontSize: '13px', 
+    fontWeight: '800', 
+    marginBottom: '25px', 
+    textTransform: 'uppercase', 
+    letterSpacing: '0.2em' 
+  }}>
+    Support
+  </h3>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    
+    {/* 1. Home -> Root Page */}
+    <Link href="/" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      Home
+    </Link>
+    
+    {/* 2. About Us -> /about folder */}
+    <Link href="/about" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      About Us
+    </Link>
+    
+    {/* 3. Contact Us -> /contact folder */}
+    <Link href="/contact" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      Contact Us
+    </Link>
+    
+    {/* 4. FAQs -> /faqs folder */}
+    <Link href="/faqs" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      FAQs
+    </Link>
+    
+  </div>
+</div>
+          </div>
+
+          {/* 4. NEWSLETTER (Signature Split Design) */}
+          <div style={{ flex: isMobile ? '1 1 100%' : '1 1 320px' }}>
+            <h3 style={{ fontSize: '11px', fontWeight: '800', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.3em', color: '#644747' }}>
+              Join our community
+            </h3>
+            
+            <div style={{ display: 'flex', alignItems: 'center', borderBottom: '1.5px solid #644747', paddingBottom: '8px', marginTop: '10px' }}>
+              <input 
+  type="email" 
+  value={email} 
+  onChange={(e) => setEmail(e.target.value)}
+  placeholder="ENTER EMAIL ADDRESS" 
+  style={{ 
+    background: 'transparent', 
+    border: 'none', 
+    color: '#644747', 
+    outline: 'none', 
+    flex: 1,
+    fontSize: '11px', 
+    letterSpacing: '0.15em',
+    padding: '5px 0'
+  }} 
+/>
+              <button 
+  onClick={handleSubscribe}
+  disabled={loading}
+  style={{ 
+    background: 'none', 
+    border: 'none', 
+    color: '#644747', 
+    fontWeight: '900', 
+    cursor: loading ? 'not-allowed' : 'pointer', 
+    fontSize: '12px', 
+    padding: '0 0 0 15px',
+    opacity: loading ? 0.5 : 1
+  }} 
+>
+  {loading ? "..." : "→"}
+</button>
+            </div>
+
+            {/* Success Message Display */}
+            {message && (
+              <p style={{ fontSize: '12px', color: '#8f645e', marginTop: '10px', fontWeight: '600', transition: '0.3s' }}>
+                {message}
+              </p>
+            )}
+          </div>
+
+        </div>
+
+        {/* BOTTOM BAR */}
+        <div style={{ 
+          maxWidth: '1300px',
+          margin: '80px auto 0 auto',
+          display: 'flex',
+          flexDirection: 'column', // Dono screen sizes par column rakha taake center alignment easy ho
+          justifyContent: 'center', // Horizontal center
+          alignItems: 'center',     // Vertical center
+          gap: '10px',
+          paddingTop: '30px', 
+          borderTop: '1px solid rgba(100, 71, 71, 0.1)', 
+          fontSize: '10px', 
+          opacity: '0.6',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          textAlign: 'center' // Text ko center karne ke liye
+        }}>
+          <div>© 2026 CHARMELUNA STORE. All rights reserved.</div>
+        </div>
+      </footer>
+
     </main>
   );
 }

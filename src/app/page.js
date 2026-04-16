@@ -1039,26 +1039,65 @@ const handleSubscribe = async () => {
             gap: isMobile ? '0' : '80px',
             justifyContent: 'space-between'
           }}>
-            {/* SHOP */}
-            <div style={{ flex: '1' }}>
-              <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Shop</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                {["Lipstick", "Foundation", "Eyes", "Lip Glow", "Skin Toner"].map((link) => (
-                  <Link key={link} href="/" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6', transition: 'opacity 0.3s' }} className="hover:opacity-100">{link}</Link>
-                ))}
-              </div>
-            </div>
+            {/* SHOP SECTION */}
+  <div style={{ flex: '1' }}>
+    <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Shop</h3>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      
+      {/* 1. Lipstick -> /shop/lipstick */}
+      <Link href="/shop/lipstick" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lipstick</Link>
+      
+      {/* 2. Foundation -> /shop/skin-foundation */}
+      <Link href="/shop/skin-foundation" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Foundation</Link>
+      
+      {/* 3. Eyes -> /shop/eye */}
+      <Link href="/shop/eye" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Eyes</Link>
+      
+      {/* 4. Lip Glow -> /shop/lip-glow */}
+      <Link href="/shop/lip-glow" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lip Glow</Link>
+      
+      {/* 5. Skin Toner -> /shop/skin-toner */}
+      <Link href="/shop/skin-toner" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Skin Toner</Link>
+      
+    </div>
+  </div>
 
-            {/* SUPPORT */}
-            <div style={{ flex: '1' }}>
-              <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Support</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                {["Home", "About Us", "Contact Us", "FAQs"].map((link) => (
-                  <Link key={link} href="/" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }}>{link}</Link>
-                ))}
-              </div>
-            </div>
-          </div>
+            {/* SUPPORT SECTION */}
+<div style={{ flex: '1' }}>
+  <h3 style={{ 
+    fontSize: '13px', 
+    fontWeight: '800', 
+    marginBottom: '25px', 
+    textTransform: 'uppercase', 
+    letterSpacing: '0.2em' 
+  }}>
+    Support
+  </h3>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    
+    {/* 1. Home -> Root Page */}
+    <Link href="/" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      Home
+    </Link>
+    
+    {/* 2. About Us -> /about folder */}
+    <Link href="/about" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      About Us
+    </Link>
+    
+    {/* 3. Contact Us -> /contact folder */}
+    <Link href="/contact" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      Contact Us
+    </Link>
+    
+    {/* 4. FAQs -> /faqs folder */}
+    <Link href="/faqs" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
+      FAQs
+    </Link>
+    
+  </div>
+</div>
+</div>
 
           {/* 4. NEWSLETTER (Signature Split Design) */}
           <div style={{ flex: isMobile ? '1 1 100%' : '1 1 320px' }}>
