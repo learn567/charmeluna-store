@@ -70,7 +70,7 @@ export default function About() {
         {isOpen && isMobile && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsOpen(false)} className="fixed inset-0 bg-black/10 z-[300]" />
-            <motion.div initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ type: "spring", damping: 25, stiffness: 200 }} style={{ position: "fixed", top: "55px", left: "7px", height: "400px", width: "220px", backgroundColor: "#fef8fc", zIndex: 310, padding: "25px", borderRadius: "15px", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1)", display: "flex", flexDirection: "column" }}>
+            <motion.div initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ type: "spring", damping: 25, stiffness: 200 }} style={{ position: "fixed", top: "55px", left: "7px", height: "400px", width: "220px", backgroundColor: "#ffffff", zIndex: 310, padding: "25px", borderRadius: "15px", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1)", display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px" }}><X size={22} style={{ color: "#67645e", cursor: "pointer", opacity: 0.7 }} onClick={() => setIsOpen(false)} /></div>
               <nav style={{ display: "flex", flexDirection: "column", gap: "25px", paddingLeft: "10px" }}>
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -187,7 +187,7 @@ export default function About() {
               animate={{ x: 0 }} 
               exit={{ x: "100%" }} 
               transition={{ type: "tween", duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} 
-              className="fixed top-0 right-0 h-full w-full max-w-[450px] bg-[#fef8fc] z-[1000] flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 h-full w-full max-w-[450px] bg-[#ffffff] z-[1000] flex flex-col shadow-2xl"
               style={{ left: 'auto', right: 0 }}
             >
               <div className="flex-1 flex flex-col p-6 md:p-10">
@@ -300,7 +300,7 @@ export default function About() {
 
 
 {/* 6. THE CHARME PROMISE SECTION (With Smooth Hover Animation) */}
-<section className="w-full py-[60px] md:py-[100px] overflow-hidden" style={{ backgroundColor: "#fef8fc" }}>
+<section className="w-full py-[60px] md:py-[100px] overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
   <div className="max-w-[1280px] mx-auto text-center px-[15px] md:px-12">
     
     {/* Heading Section */}
