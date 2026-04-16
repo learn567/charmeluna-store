@@ -266,67 +266,7 @@ export default function About() {
   </div>
 </section>
 
-  {/* 6. AESTHETIC SPLIT REVEAL SECTION */}
-<section className="w-full py-[40px] md:py-[100px] px-6 md:px-12 bg-[#fef8fc]">
-  <div className="max-w-[1260px] mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-24">
-    
-    {/* Image Side (Left) */}
-    <div className="w-full md:w-[45%]">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[15px] shadow-sm group">
-        <img 
-          src="/images/product-aesthetic.webp" // Yahan apni kisi pyari si product photo ka link dalo
-          alt="Charme Luna Aesthetic" 
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-black/5 pointer-events-none" />
-      </div>
-    </div>
-
-    {/* Text Side (Right) */}
-    <div className="w-full md:w-[55%] flex flex-col items-start">
-      <span 
-        style={{ fontFamily: 'Swiss, sans-serif' }} 
-        className="text-[#67645e] uppercase tracking-[0.3em] text-[11px] font-bold mb-6 opacity-60"
-      >
-        Our Philosophy
-      </span>
-      
-      <h2 
-        style={{ fontFamily: '"Gowun Batang", serif' }} 
-        className="text-[#67645e] text-[28px] md:text-[42px] leading-[1.2] mb-8 italic"
-      >
-        Refined textures, <br />
-        uncomplicated beauty.
-      </h2>
-
-      <div 
-        style={{ fontFamily: 'Swiss, sans-serif' }} 
-        className="max-w-[480px] text-[#67645e]/80 text-[14px] md:text-[15px] leading-relaxed tracking-wide space-y-5"
-      >
-        <p>
-          We believe that what you put on your face should feel as good as it looks. Every formula in the Charme Luna collection is developed with a focus on skin-loving ingredients and lightweight textures.
-        </p>
-        <p>
-          It’s about more than just cosmetics; it’s about a routine that brings a sense of calm and confidence to your day.
-        </p>
-      </div>
-
-      <Link 
-        href="/shop" 
-        className="mt-12 group flex items-center gap-4 no-underline"
-      >
-        <div className="w-12 h-[1px] bg-[#67645e] transition-all duration-300 group-hover:w-16" />
-        <span 
-          style={{ fontFamily: 'Swiss, sans-serif' }} 
-          className="text-[#67645e] uppercase tracking-[0.2em] text-[11px] font-bold transition-opacity group-hover:opacity-60"
-        >
-          Explore Collection
-        </span>
-      </Link>
-    </div>
-
-  </div>
-</section>
+  
     </main>
   );
 }
