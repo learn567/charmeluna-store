@@ -9,7 +9,6 @@ export default function LipGlowPage() {
           Lip Glow Collection
         </h1>
         
-        {/* Filhal placeholder text jab tak aap products add nahi karti */}
         <p className="text-gray-500 italic">Coming Soon...</p>
       </div>
     </div>

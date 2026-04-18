@@ -1,4 +1,3 @@
-// Example of a correct contact page
 import React from 'react'
 
 export default function ContactPage() {

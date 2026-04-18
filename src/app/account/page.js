@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 export default function AccountPage() {
   return (
     <main className="min-h-screen bg-[#fef8fc] flex flex-col items-center justify-center px-4">
-      {/* Logo Link (Back to Home) */}
       <Link href="/" className="mb-10 no-underline">
          <h1 style={{ fontFamily: '"Gowun Batang", serif', fontSize: '40px', color: '#67645e', letterSpacing: '0.2em' }}>
            CL
@@ -52,7 +51,6 @@ export default function AccountPage() {
         </div>
       </motion.div>
 
-      {/* Back to Shop link */}
       <Link href="/shop" className="mt-10 text-[11px] text-[#67645e]/50 uppercase tracking-[0.3em] hover:text-[#67645e]">
         ← Back to Shop
       </Link>

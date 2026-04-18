@@ -31,7 +31,6 @@ const [isCartOpen, setIsCartOpen] = useState(false);
     philanthropy: "Charmeluna Futures supports initiatives that remove the obstacles limiting women’s growth and independence.",
     sustainability: "Carefully chosen ingredients and sustainable packaging—because mindful skincare matters."
   };
-    // For the iconic products section
   const iconicProducts = [
   {
     name: "CHERRY RED",
@@ -75,7 +74,7 @@ useEffect(() => {
     iconicProducts.forEach((product) => {
       const img1 = new window.Image();
       img1.src = product.leftImg;
-      img1.decode(); // Browser ko signal deta hai ke image ko ready rakhe
+      img1.decode(); 
 
       const img2 = new window.Image();
       img2.src = product.rightImg;
@@ -112,7 +111,6 @@ const handleSubscribe = async () => {
   document.body.style.overflow = 'hidden';
   setWindowWidth(window.innerWidth);
   
-  // Animation shuru hote hi scrolling lock kar do
   document.body.style.overflow = 'hidden';
 
   const fetchProducts = async () => {
@@ -144,7 +142,6 @@ const handleSubscribe = async () => {
   const cornerTimer = setTimeout(() => {
     setGoToCorner(true);
     setHasSeenAnimation(true);
-    // Door khul gaya, ab scroll allow karo
     document.body.style.overflow = 'auto'; 
 }, 6000);
 
@@ -154,7 +151,6 @@ const handleSubscribe = async () => {
     clearTimeout(tightTimer);
     clearTimeout(finalTimer);
     clearTimeout(cornerTimer);
-    // Cleanup mein scroll hamesha on rakhein
     document.body.style.overflow = 'auto';
   };
 }, []);
@@ -406,7 +402,7 @@ const handleSubscribe = async () => {
             className="flex items-center z-[130] pointer-events-auto" 
             style={{ color: isScrolled ? "#67645e" : "#ffffff" }}
           >
-            {/* Updated Search UI with White Background */}
+           
 <div className="flex items-center relative mr-[10px] md:mr-[35px]">
   <AnimatePresence>
     {isSearchOpen && (
@@ -469,11 +465,11 @@ const handleSubscribe = async () => {
           transition={{ duration: 1.5 }}
         >
 
-          {/* --- SIDE CART DRAWER --- */}
+         
 <AnimatePresence>
   {isCartOpen && (
     <>
-      {/* Background Blur Overlay */}
+      
       <motion.div 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
@@ -482,13 +478,13 @@ const handleSubscribe = async () => {
         className="fixed inset-0 bg-black/20 z-[999] backdrop-blur-[2px]"
       />
 
-      {/* Drawer Panel */}
+    
       <motion.div 
   initial={{ x: "100%" }} 
   animate={{ x: 0 }} 
   exit={{ x: "100%" }} 
   transition={{ type: "tween", duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} 
-  style={{ right: 0, left: 'auto' }} // Ye line zaroori hai right side fix karne ke liye
+  style={{ right: 0, left: 'auto' }} 
   className="fixed top-0 right-0 h-full w-full max-w-[450px] bg-[#fef8fc] z-[1000] flex flex-col shadow-2xl"
 >
         <div className="flex-1 flex flex-col p-6 md:p-10">
@@ -508,7 +504,7 @@ const handleSubscribe = async () => {
             </button>
           </div>
 
-          {/* Empty State Section */}
+          
           <div className="flex-1 flex flex-col items-center justify-center border border-[#f1f0ed] rounded-[20px] bg-white/50 px-6 py-10 shadow-sm">
             <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-inner border border-[#f1f0ed]">
               <ShoppingBag size={20} className="text-[#d3beab]" />
@@ -531,14 +527,14 @@ const handleSubscribe = async () => {
     </>
   )}
 </AnimatePresence>
-          {/* 1. Banner Section (fst-banner.webp) */}
+          {/* 1. Banner Section */}
           <motion.div initial={{ opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1.2, delay: 1.5 }} className="w-full flex justify-center mt-[55px] relative z-10 px-4 md:px-12">
              <div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "400px" : "570px" }}>
                <img src="/images/fst-banner.webp" alt="First Banner" className="w-full h-full object-cover block" />
              </div>
           </motion.div>
 
-          {/* 2. Marquee Text (Glow starts here) - Isko Banner ke niche paste karein */}
+          {/* 2. Marquee Text  */}
 <motion.div 
   initial={hasSeenAnimation ? { opacity: 1 } : { opacity: 0 }} 
   animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} 
@@ -637,7 +633,6 @@ const handleSubscribe = async () => {
   <div className="max-w-[1300px] mx-auto px-4">
     <div className="category-container border-b-[30px] border-transparent"> 
       
-      {/* 1st: Eyes */}
 <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
 
   <Image 
@@ -664,7 +659,6 @@ const handleSubscribe = async () => {
   </span>
 </div>
 
-      {/* 2nd: Lip Glow */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image 
           src="/images/lipglowcategory.webp" 
@@ -688,7 +682,6 @@ const handleSubscribe = async () => {
         </span>
       </div>
 
-      {/* 3rd: Lipstick */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image
   src="/images/lipstick-category.webp"
@@ -713,7 +706,6 @@ const handleSubscribe = async () => {
         </span>
       </div>
 
-      {/* 4th: Skin Toner */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image 
           src="/images/skintonercategory.webp" 
@@ -737,7 +729,6 @@ const handleSubscribe = async () => {
         </span>
       </div>
 
-      {/* 5th: Foundation */}
       <div className="category-card group relative rounded-[15px] overflow-hidden shadow-sm bg-black flex items-center justify-center cursor-pointer">
         <Image 
           src="/images/foundationcategory.webp" 
@@ -774,7 +765,6 @@ const handleSubscribe = async () => {
     padding: isMobile ? '0' : '20px 0' 
   }}
 >
-  {/* LEFT */}
   <div 
     style={{ 
       backgroundColor: "#f1f0ed", 
@@ -884,7 +874,6 @@ const handleSubscribe = async () => {
   </h2>
 
   <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', gap: '0' }}>
-    {/* LEFT SIDE - Product Image */}
     <div 
       style={{ 
         flex: isMobile ? '1 1 100%' : '1 1 500px', 
@@ -905,12 +894,10 @@ const handleSubscribe = async () => {
           width: isMobile ? '70%' : '80%', 
           height: 'auto', 
           objectFit: 'contain',
-          // transition: 'opacity 0.5s ease-in-out' //
         }}
       />
     </div>
 
-    {/* RIGHT SIDE - Shade Image & Controls */}
     <div 
       style={{ 
         backgroundColor: "#f1f0ed", 
@@ -932,7 +919,6 @@ const handleSubscribe = async () => {
         position: 'relative',
         marginBottom: '150px' 
       }}>
-        {/* Left Arrow */}
         <button 
           onClick={() => setIconicIndex(iconicIndex === 0 ? iconicProducts.length - 1 : iconicIndex - 1)}
           style={{ background: 'none', border: '1px solid #b0a79e', borderRadius: '50%', width: '45px', height: '45px', color: '#555', position: 'absolute', left: '0', zIndex: 10, cursor: 'pointer' }}
@@ -948,7 +934,6 @@ const handleSubscribe = async () => {
           }}
         />
 
-        {/* Right Arrow */}
         <button 
           onClick={() => setIconicIndex((iconicIndex + 1) % iconicProducts.length)}
           style={{ background: 'none', border: '1px solid #b0a79e', borderRadius: '50%', width: '45px', height: '45px', color: '#555', position: 'absolute', right: '0', zIndex: 10, cursor: 'pointer' }}
@@ -980,15 +965,13 @@ const handleSubscribe = async () => {
       <footer style={{ 
         backgroundColor: '#fef8fc', 
         color: '#644747', 
-        // Top padding kam kar di (isMobile ? 30px : 50px)
+
         padding: isMobile ? '30px 20px 20px 20px' : '50px 80px 40px 80px', 
         fontFamily: "'Swiss', sans-serif",
-        // Top margin ko 80px se gira kar 20px kar diya
         marginTop: '02px', 
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Background Decorative Text (Luxury Touch) */}
         {!isMobile && (
           <div style={{
             position: 'absolute',
@@ -1015,7 +998,6 @@ const handleSubscribe = async () => {
           zIndex: 1
         }}>
           
-          {/* 1. BRAND INITIALS & STORY */}
           <div style={{ flex: isMobile ? '1 1 100%' : '1 1 350px', marginBottom: isMobile ? '20px' : '0' }}>
             <div style={{ 
     fontSize: '42px', 
@@ -1032,7 +1014,6 @@ const handleSubscribe = async () => {
   </p>
 </div>
 
-          {/* 2 & 3. COMBINED LINKS CONTAINER FOR MOBILE SIDE-BY-SIDE */}
           <div style={{ 
             display: 'flex', 
             flex: isMobile ? '1 1 100%' : '1 1 400px', 
@@ -1044,19 +1025,14 @@ const handleSubscribe = async () => {
     <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Shop</h3>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
       
-      {/* 1. Lipstick -> /shop/lipstick */}
       <Link href="/shop/lipstick" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lipstick</Link>
       
-      {/* 2. Foundation -> /shop/skin-foundation */}
       <Link href="/shop/skin-foundation" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Foundation</Link>
       
-      {/* 3. Eyes -> /shop/eye */}
       <Link href="/shop/eye" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Eyes</Link>
       
-      {/* 4. Lip Glow -> /shop/lip-glow */}
       <Link href="/shop/lip-glow" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lip Glow</Link>
       
-      {/* 5. Skin Toner -> /shop/skin-toner */}
       <Link href="/shop/skin-toner" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Skin Toner</Link>
       
     </div>
@@ -1075,22 +1051,18 @@ const handleSubscribe = async () => {
   </h3>
   <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
     
-    {/* 1. Home -> Root Page */}
     <Link href="/" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
       Home
     </Link>
     
-    {/* 2. About Us -> /about folder */}
     <Link href="/about" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
       About Us
     </Link>
     
-    {/* 3. Contact Us -> /contact folder */}
     <Link href="/contact" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
       Contact Us
     </Link>
     
-    {/* 4. FAQs -> /faqs folder */}
     <Link href="/faqs" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">
       FAQs
     </Link>
@@ -1099,7 +1071,7 @@ const handleSubscribe = async () => {
 </div>
 </div>
 
-          {/* 4. NEWSLETTER (Signature Split Design) */}
+          {/* 4. NEWSLETTER  */}
           <div style={{ flex: isMobile ? '1 1 100%' : '1 1 320px' }}>
             <h3 style={{ fontSize: '11px', fontWeight: '800', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.3em', color: '#644747' }}>
               Join our community
@@ -1140,7 +1112,6 @@ const handleSubscribe = async () => {
 </button>
             </div>
 
-            {/* Success Message Display */}
             {message && (
               <p style={{ fontSize: '12px', color: '#8f645e', marginTop: '10px', fontWeight: '600', transition: '0.3s' }}>
                 {message}
@@ -1155,9 +1126,9 @@ const handleSubscribe = async () => {
           maxWidth: '1300px',
           margin: '80px auto 0 auto',
           display: 'flex',
-          flexDirection: 'column', // Dono screen sizes par column rakha taake center alignment easy ho
-          justifyContent: 'center', // Horizontal center
-          alignItems: 'center',     // Vertical center
+          flexDirection: 'column', 
+          justifyContent: 'center', 
+          alignItems: 'center',     
           gap: '10px',
           paddingTop: '30px', 
           borderTop: '1px solid rgba(100, 71, 71, 0.1)', 
@@ -1165,7 +1136,7 @@ const handleSubscribe = async () => {
           opacity: '0.6',
           letterSpacing: '0.15em',
           textTransform: 'uppercase',
-          textAlign: 'center' // Text ko center karne ke liye
+          textAlign: 'center' 
         }}>
           <div>© 2026 CHARMELUNA STORE. All rights reserved.</div>
         </div>
