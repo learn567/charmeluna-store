@@ -5,7 +5,7 @@ import { Search, User, ShoppingBag, Menu, X, ChevronDown, Droplets, Leaf, Shield
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../supabase";
 export default function About() {
-  // 1. States
+  
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false); 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -14,12 +14,12 @@ export default function About() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Newsletter states
+  
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 2. Subscription Function
+  
   const handleSubscribe = async () => {
     if (!email || !email.includes("@")) {
       setMessage("Please enter a valid email.");
@@ -43,7 +43,7 @@ export default function About() {
     }
   };
 
-  // 3. Effects
+  
   useEffect(() => {
     setIsMounted(true);
     setWindowWidth(window.innerWidth);
@@ -64,12 +64,13 @@ export default function About() {
   return (
     <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#ffffff" }}>
       
-      {/* 1. MOBILE SIDEBAR */}
+      
+      {/* MOBILE SIDEBAR */}
       <AnimatePresence>
         {isOpen && isMobile && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsOpen(false)} className="fixed inset-0 bg-black/10 z-[300]" />
-            <motion.div initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ type: "spring", damping: 25, stiffness: 200 }} style={{ position: "fixed", top: "55px", left: "7px", height: "400px", width: "220px", backgroundColor: "#ffffff", zIndex: 310, padding: "25px", borderRadius: "15px", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1)", display: "flex", flexDirection: "column" }}>
+            <motion.div initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ type: "spring", damping: 25, stiffness: 200 }} style={{ position: "fixed", top: "55px", left: "7px", height: "400px", width: "220px", backgroundColor: "#fef8fc", zIndex: 310, padding: "25px", borderRadius: "15px", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1)", display: "flex", flexDirection: "column" }}>
               <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "30px" }}><X size={22} style={{ color: "#67645e", cursor: "pointer", opacity: 0.7 }} onClick={() => setIsOpen(false)} /></div>
               <nav style={{ display: "flex", flexDirection: "column", gap: "25px", paddingLeft: "10px" }}>
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -93,14 +94,14 @@ export default function About() {
         )}
       </AnimatePresence>
 
-      {/* 2. TOP ANNOUNCEMENT BAR */}
+      {/*  TOP ANNOUNCEMENT BAR */}
       <div className="relative w-full flex justify-center z-[100] py-[10px] px-4 md:px-12 bg-transparent">
         <div className="flex justify-center items-center rounded-[5px] shadow-sm bg-[#f1f0ed]" style={{ height: isMobile ? "30px" : "35px", width: isMobile ? "96%" : "100%", maxWidth: "1280px" }}>
           <p style={{ fontFamily: 'Swiss, sans-serif', fontSize: isMobile ? "9px" : "13px", fontWeight: "600", color: "#67645e", textTransform: "uppercase", letterSpacing: "0.1em" }}>Free Shipping on orders over 5000</p>
         </div>
       </div>
 
-      {/* 3. MAIN HEADER */}
+      {/*  MAIN HEADER */}
       <header className={`${isScrolled ? "fixed bg-[#f1f0ed] shadow-md" : "absolute bg-transparent"} left-0 w-full flex justify-center z-[120] transition-colors duration-300`} style={{ top: isScrolled ? "0" : (isMobile ? "45px" : "60px"), height: "62px" }}>
         <div className="w-full max-w-[1260px] h-full flex justify-between items-center relative" style={{ paddingLeft: isMobile ? "15px" : "80px", paddingRight: isMobile ? "15px" : "80px" }}> 
           
@@ -183,12 +184,11 @@ export default function About() {
               animate={{ x: 0 }} 
               exit={{ x: "100%" }} 
               transition={{ type: "tween", duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }} 
-              className="fixed top-0 right-0 h-full w-full max-w-[450px] bg-[#ffffff] z-[1000] flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 h-full w-full max-w-[450px] bg-[#fef8fc] z-[1000] flex flex-col shadow-2xl"
               style={{ left: 'auto', right: 0 }}
             >
               <div className="flex-1 flex flex-col p-6 md:p-10">
                 
-                {/* Header Section  */}
                 <div className="flex justify-between items-start mb-12">
                   <div>
                     <h3 style={{ fontFamily: 'Swiss, sans-serif' }} className="text-[#8f645e] uppercase tracking-[0.3em] font-bold text-[14px]">
@@ -230,7 +230,6 @@ export default function About() {
         )}
       </AnimatePresence>
 
-      {/* 4. MAIN BANNER */}
       <div className="w-full flex justify-center px-4 md:px-12 mt-1 md:mt-2">
         <div className="relative overflow-hidden rounded-[8px] md:rounded-[10px] mx-auto" style={{ height: isMobile ? "300px" : "600px", width: isMobile ? "95%" : "100%", maxWidth: "1280px" }}>
           <img src="/images/about-banner.webp" alt="Main Banner" className="w-full h-full object-cover block shadow-sm" />
@@ -238,7 +237,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* 5. FOUNDER NOTE SECTION */}
 <section className="w-full flex justify-center items-center py-[60px] md:py-[100px] px-6 md:px-12">
   <div 
     className="w-full max-w-[1280px] flex flex-col items-center text-center px-4 md:px-20 py-[50px] md:py-[80px] rounded-[10px]" 
@@ -291,8 +289,8 @@ export default function About() {
 </section>
 
 
-{/* 6. THE CHARME PROMISE SECTION  */}
-<section className="w-full py-[60px] md:py-[100px] overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+{/*  THE CHARME PROMISE SECTION  */}
+<section className="w-full py-[60px] md:py-[100px] overflow-hidden" style={{ backgroundColor: "#fef8fc" }}>
   <div className="max-w-[1280px] mx-auto text-center px-[15px] md:px-12">
     
     <div className="mb-10 md:mb-20 px-4">
@@ -357,6 +355,7 @@ export default function About() {
             width: '100%',
             boxSizing: 'border-box'
           }}
+          
           onMouseEnter={(e) => {
              e.currentTarget.style.boxShadow = "0 25px 50px -12px rgba(0,0,0,0.12)";
              e.currentTarget.style.borderColor = "#d3beab";
@@ -366,7 +365,7 @@ export default function About() {
              e.currentTarget.style.borderColor = "#f1f0ed";
           }}
         >
-           
+          
           <div className="transition-transform duration-500 hover:rotate-6" style={{ marginBottom: isMobile ? '12px' : '25px', color: '#d3beab' }}>
             {item.icon}
           </div>
@@ -408,10 +407,11 @@ export default function About() {
   </div>
 </section>
 
-{/* --- FOOTER --- */}
+
       <footer style={{ 
         backgroundColor: '#fef8fc', 
         color: '#644747', 
+        
         padding: isMobile ? '30px 20px 20px 20px' : '50px 80px 40px 80px', 
         fontFamily: "'Swiss', sans-serif",
         marginTop: '02px', 
@@ -483,7 +483,6 @@ export default function About() {
     </div>
   </div>
 
-            
 <div style={{ flex: '1' }}>
   <h3 style={{ 
     fontSize: '13px', 
@@ -565,7 +564,6 @@ export default function About() {
 
         </div>
 
-        {/* BOTTOM BAR */}
         <div style={{ 
           maxWidth: '1300px',
           margin: '80px auto 0 auto',
