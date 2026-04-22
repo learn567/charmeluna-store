@@ -290,7 +290,7 @@ export default function About() {
 
 
 {/*  THE CHARME PROMISE SECTION  */}
-<section className="w-full py-[60px] md:py-[100px] overflow-hidden" style={{ backgroundColor: "#fef8fc" }}>
+<section className="w-full py-[60px] md:py-[100px] overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
   <div className="max-w-[1280px] mx-auto text-center px-[15px] md:px-12">
     
     <div className="mb-10 md:mb-20 px-4">
