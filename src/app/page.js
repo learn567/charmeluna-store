@@ -595,7 +595,7 @@ const handleSubscribe = async () => {
   animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} 
   transition={{ duration: 1, delay: 2.2 }}
   className="w-full py-16"
-  style={{ backgroundColor: "#fef8fc" }} 
+  style={{ backgroundColor: "#ffffff" }} 
 >
   <style>{`
     .category-container {
@@ -878,7 +878,7 @@ const handleSubscribe = async () => {
       style={{ 
         flex: isMobile ? '1 1 100%' : '1 1 500px', 
         minHeight: isMobile ? '150px' : '200px', 
-        backgroundColor: '#ffffff', 
+        backgroundColor: '#f1f0ed', 
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
