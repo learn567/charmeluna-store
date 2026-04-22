@@ -529,7 +529,7 @@ const handleSubscribe = async () => {
 </AnimatePresence>
           {/* 1. Banner Section */}
           <motion.div initial={{ opacity: 0 }} animate={goToCorner ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1.2, delay: 1.5 }} className="w-full flex justify-center mt-[55px] relative z-10 px-4 md:px-12">
-             <div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "400px" : "570px" }}>
+             <div className="relative overflow-hidden rounded-[10px] bg-transparent mx-auto" style={{ width: isMobile ? "95%" : "1280px", height: isMobile ? "200px" : "570px" }}>
                <img src="/images/fst-banner.webp" alt="First Banner" className="w-full h-full object-cover block" />
              </div>
           </motion.div>
