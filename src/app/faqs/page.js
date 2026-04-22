@@ -3,9 +3,39 @@ import { useState, useEffect } from "react";
 import Link from "next/link"; 
 import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "../../supabase";
 
 export default function FAQS() {
     const [openIndex, setOpenIndex] = useState(null);
+    // Footer ki zaroori states
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Email subscribe karne ka function
+  const handleSubscribe = async () => {
+    if (!email || !email.includes("@")) {
+      setMessage("Please enter a valid email.");
+      return;
+    }
+    setLoading(true);
+    try {
+      // Yahan aap apna supabase logic likh sakte hain
+      const { error } = await supabase.from('subscribers').insert([{ email: email }]);
+      if (error) {
+        if (error.code === '23505') setMessage("Already subscribed! ✨");
+        else setMessage("Error subscribing.");
+      } else {
+        setMessage("Welcome to the community! ✨");
+        setEmail("");
+      }
+    } catch (err) {
+      setMessage("Network error.");
+    } finally {
+      setLoading(false);
+      setTimeout(() => setMessage(""), 4000);
+    }
+  };
   const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false); 
   const [windowWidth, setWindowWidth] = useState(0);
@@ -240,7 +270,7 @@ export default function FAQS() {
               onClick={() => setOpenIndex(isOpen ? null : index)}
               // bg-transparent aur outline-none se gray box khatam ho jayega
               className="w-full flex flex-col md:flex-row justify-center md:justify-between items-center cursor-pointer py-10 transition-all duration-500 hover:opacity-70 text-center md:text-left bg-transparent border-none outline-none" 
-              style={{ paddingTop: '40px', paddingBottom: '40px' }}
+              style={{ paddingTop: '1px', paddingBottom: '1px' }}
             >
               <span className="text-[11px] md:text-[12px] uppercase tracking-[0.4em] text-[#67645e] font-semibold leading-relaxed mb-4 md:mb-0 md:pr-8">
                 {faq.q}
@@ -279,6 +309,133 @@ export default function FAQS() {
     </div>
   </div>
 </section>
+
+{/* FOOTER SECTION */}
+      <footer style={{ 
+        backgroundColor: '#fef8fc', 
+        color: '#644747', 
+        padding: isMobile ? '30px 20px 20px 20px' : '50px 80px 40px 80px', 
+        fontFamily: "'Swiss', sans-serif",
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {!isMobile && (
+          <div style={{
+            position: 'absolute',
+            bottom: '-10px',
+            right: '10px',
+            fontSize: '170px',
+            fontWeight: '900',
+            color: '#644747',
+            opacity: '0.06',
+            pointerEvents: 'none',
+            letterSpacing: '-0.02em'
+          }}>
+            CHARMELUNA
+          </div>
+        )}
+
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          maxWidth: '1300px', 
+          margin: '0 auto', 
+          gap: isMobile ? '40px 0px' : '40px',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          
+          <div style={{ flex: isMobile ? '1 1 100%' : '1 1 350px' }}>
+            <div style={{ 
+              fontSize: '42px', 
+              fontWeight: '900', 
+              fontFamily: '"Gowun Batang", serif', 
+              color: '#644747', 
+              marginBottom: '15px',
+              lineHeight: '1'
+            }}>
+              CL<span style={{ color: '#b3848f', fontSize: '50px' }}>.</span>
+            </div>
+            <p style={{ fontSize: '14px', opacity: '0.7', color: '#644747' }}>
+              Elevating the standard of beauty through mindful ingredients and iconic design.
+            </p>
+          </div>
+
+          <div style={{ 
+            display: 'flex', 
+            flex: isMobile ? '1 1 100%' : '1 1 400px', 
+            gap: isMobile ? '0' : '80px',
+            justifyContent: 'space-between'
+          }}>
+            <div style={{ flex: '1' }}>
+              <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Shop</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <Link href="/shop/lipstick" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lipstick</Link>
+                <Link href="/shop/skin-foundation" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Foundation</Link>
+                <Link href="/shop/eye" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Eyes</Link>
+                <Link href="/shop/lip-glow" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lip Glow</Link>
+                <Link href="/shop/skin-toner" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Skin Toner</Link>
+              </div>
+            </div>
+
+            <div style={{ flex: '1' }}>
+              <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Support</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <Link href="/" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Home</Link>
+                <Link href="/about" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">About Us</Link>
+                <Link href="/contact" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Contact Us</Link>
+                <Link href="/faqs" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">FAQs</Link>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ flex: isMobile ? '1 1 100%' : '1 1 320px' }}>
+            <h3 style={{ fontSize: '11px', fontWeight: '800', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.3em', color: '#644747' }}>
+              Join our community
+            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', borderBottom: '1.5px solid #644747', paddingBottom: '8px', marginTop: '10px' }}>
+              <input 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="ENTER EMAIL ADDRESS" 
+                style={{ background: 'transparent', border: 'none', color: '#644747', outline: 'none', flex: 1, fontSize: '11px', letterSpacing: '0.15em', padding: '5px 0' }} 
+              />
+              <button 
+                onClick={handleSubscribe}
+                disabled={loading}
+                style={{ background: 'none', border: 'none', color: '#644747', fontWeight: '900', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '12px', padding: '0 0 0 15px', opacity: loading ? 0.5 : 1 }} 
+              >
+                {loading ? "..." : "→"}
+              </button>
+            </div>
+            {message && (
+              <p style={{ fontSize: '12px', color: '#8f645e', marginTop: '10px', fontWeight: '600' }}>
+                {message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* BOTTOM FOOTER */}
+        <div style={{ 
+          maxWidth: '1300px',
+          margin: '80px auto 0 auto',
+          display: 'flex',
+          flexDirection: 'column', 
+          justifyContent: 'center', 
+          alignItems: 'center',     
+          paddingTop: '30px', 
+          borderTop: '1px solid rgba(100, 71, 71, 0.1)', 
+          fontSize: '10px', 
+          opacity: '0.6',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          textAlign: 'center' 
+        }}>
+          <div>© 2026 CHARMELUNA STORE. All rights reserved.</div>
+        </div>
+      </footer>
 
     </main>
   );

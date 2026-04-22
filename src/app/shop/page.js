@@ -12,6 +12,26 @@ export default function Shop() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  
+  // FAQ state
+  const [openIndex, setOpenIndex] = useState(null);
+
+  // FOOTER states (Jo miss ho rahi thin)
+  const [email, setEmail] = useState(""); 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubscribe = () => {
+    if (!email) return;
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setMessage("Thank you for joining!");
+      setEmail("");
+    }, 1000);
+  };
+
+  // ... (Baaqi ka useEffect aur return code)
 
   useEffect(() => {
     setIsMounted(true);
@@ -31,7 +51,7 @@ export default function Shop() {
   const isMobile = windowWidth < 768;
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#fef8fc" }}>
+    <main className="relative min-h-screen overflow-x-hidden" style={{ backgroundColor: "#ffffff" }}>
       
       {/* 1. MOBILE SIDEBAR */}
       <AnimatePresence>
@@ -136,9 +156,11 @@ export default function Shop() {
         </div>
       </header>
 
+      {/* 5. SIDE CART DRAWER (CLEAN DESIGN) */}
       <AnimatePresence>
         {isCartOpen && (
           <>
+            {/* Background Blur Overlay */}
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
@@ -147,6 +169,7 @@ export default function Shop() {
               className="fixed inset-0 bg-black/20 z-[999] backdrop-blur-[2px]"
             />
 
+            {/* Drawer Panel */}
             <motion.div 
               initial={{ x: "100%" }} 
               animate={{ x: 0 }} 
@@ -157,12 +180,13 @@ export default function Shop() {
             >
               <div className="flex-1 flex flex-col p-6 md:p-10">
                 
-                {/* Header Section  */}
+                {/* Header Section - Underline Hatadi hai */}
                 <div className="flex justify-between items-start mb-12">
                   <div>
                     <h3 style={{ fontFamily: 'Swiss, sans-serif' }} className="text-[#8f645e] uppercase tracking-[0.3em] font-bold text-[14px]">
                       Your Bag
                     </h3>
+                    {/* Yahan se line delete kardi */}
                   </div>
                   <button 
                     onClick={() => setIsCartOpen(false)} 
@@ -172,6 +196,7 @@ export default function Shop() {
                   </button>
                 </div>
 
+                {/* Empty State Section */}
                 <div className="flex-1 flex flex-col items-center justify-center border border-[#f1f0ed] rounded-[20px] bg-white/50 px-6 py-10 shadow-sm">
                   <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-inner border border-[#f1f0ed]">
                     <ShoppingBag size={20} className="text-[#d3beab]" />
@@ -183,7 +208,7 @@ export default function Shop() {
                   
                   
                   
-                  {/* Shop Now  */}
+                  {/* Shop Now / Continue Shopping Button - Hover Color Fixed */}
                   <button 
                     onClick={() => setIsCartOpen(false)} 
                     className="w-full max-w-[240px] py-4 border border-[#67645e] text-[#8f645e] text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-[#67645e] hover:text-[#8f645e] transition-colors duration-300 rounded-full"
@@ -208,6 +233,132 @@ export default function Shop() {
         </div>
       </div>
 
-    </main>
+      {/* FOOTER SECTION */}
+      <footer style={{ 
+        backgroundColor: '#fef8fc', 
+        color: '#644747', 
+        padding: isMobile ? '30px 20px 20px 20px' : '50px 80px 40px 80px', 
+        fontFamily: "'Swiss', sans-serif",
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {!isMobile && (
+          <div style={{
+            position: 'absolute',
+            bottom: '-10px',
+            right: '10px',
+            fontSize: '170px',
+            fontWeight: '900',
+            color: '#644747',
+            opacity: '0.06',
+            pointerEvents: 'none',
+            letterSpacing: '-0.02em'
+          }}>
+            CHARMELUNA
+          </div>
+        )}
+
+        <div style={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          maxWidth: '1300px', 
+          margin: '0 auto', 
+          gap: isMobile ? '40px 0px' : '40px',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          
+          <div style={{ flex: isMobile ? '1 1 100%' : '1 1 350px' }}>
+            <div style={{ 
+              fontSize: '42px', 
+              fontWeight: '900', 
+              fontFamily: '"Gowun Batang", serif', 
+              color: '#644747', 
+              marginBottom: '15px',
+              lineHeight: '1'
+            }}>
+              CL<span style={{ color: '#b3848f', fontSize: '50px' }}>.</span>
+            </div>
+            <p style={{ fontSize: '14px', opacity: '0.7', color: '#644747' }}>
+              Elevating the standard of beauty through mindful ingredients and iconic design.
+            </p>
+          </div>
+
+          <div style={{ 
+            display: 'flex', 
+            flex: isMobile ? '1 1 100%' : '1 1 400px', 
+            gap: isMobile ? '0' : '80px',
+            justifyContent: 'space-between'
+          }}>
+            <div style={{ flex: '1' }}>
+              <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Shop</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <Link href="/shop/lipstick" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lipstick</Link>
+                <Link href="/shop/skin-foundation" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Foundation</Link>
+                <Link href="/shop/eye" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Eyes</Link>
+                <Link href="/shop/lip-glow" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Lip Glow</Link>
+                <Link href="/shop/skin-toner" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Skin Toner</Link>
+              </div>
+            </div>
+
+            <div style={{ flex: '1' }}>
+              <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Support</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <Link href="/" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Home</Link>
+                <Link href="/about" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">About Us</Link>
+                <Link href="/contact" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">Contact Us</Link>
+                <Link href="/faqs" style={{ color: '#644747', textDecoration: 'none', fontSize: '13px', opacity: '0.6' }} className="hover:opacity-100">FAQs</Link>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ flex: isMobile ? '1 1 100%' : '1 1 320px' }}>
+            <h3 style={{ fontSize: '11px', fontWeight: '800', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.3em', color: '#644747' }}>
+              Join our community
+            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', borderBottom: '1.5px solid #644747', paddingBottom: '8px', marginTop: '10px' }}>
+              <input 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="ENTER EMAIL ADDRESS" 
+                style={{ background: 'transparent', border: 'none', color: '#644747', outline: 'none', flex: 1, fontSize: '11px', letterSpacing: '0.15em', padding: '5px 0' }} 
+              />
+              <button 
+                onClick={handleSubscribe}
+                disabled={loading}
+                style={{ background: 'none', border: 'none', color: '#644747', fontWeight: '900', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '12px', padding: '0 0 0 15px', opacity: loading ? 0.5 : 1 }} 
+              >
+                {loading ? "..." : "→"}
+              </button>
+            </div>
+            {message && (
+              <p style={{ fontSize: '12px', color: '#8f645e', marginTop: '10px', fontWeight: '600' }}>
+                {message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* BOTTOM FOOTER */}
+        <div style={{ 
+          maxWidth: '1300px',
+          margin: '80px auto 0 auto',
+          display: 'flex',
+          flexDirection: 'column', 
+          justifyContent: 'center', 
+          alignItems: 'center',     
+          paddingTop: '30px', 
+          borderTop: '1px solid rgba(100, 71, 71, 0.1)', 
+          fontSize: '10px', 
+          opacity: '0.6',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          textAlign: 'center' 
+        }}>
+          <div>© 2026 CHARMELUNA STORE. All rights reserved.</div>
+        </div>
+      </footer>
+     </main>
   );
-}
+}   
