@@ -841,7 +841,7 @@ const handleSubscribe = async () => {
   style={{ 
     backgroundColor: "#f8f7f5", 
     flex: isMobile ? '1 1 100%' : '1 1 500px', 
-    minHeight: isMobile ? '300px' : '600px', 
+    minHeight: isMobile ? '350px' : '600px', 
     position: 'relative', 
     overflow: 'hidden' 
   }}
