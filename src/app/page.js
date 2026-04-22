@@ -961,7 +961,7 @@ const handleSubscribe = async () => {
   </div>
 </div>
 
-   {/* --- MODERN LUXURY FOOTER --- */}
+   {/* ---  FOOTER --- */}
       <footer style={{ 
         backgroundColor: '#f1f0ed', 
         color: '#644747', 
@@ -1020,7 +1020,7 @@ const handleSubscribe = async () => {
             gap: isMobile ? '0' : '80px',
             justifyContent: 'space-between'
           }}>
-            {/* SHOP SECTION */}
+            
   <div style={{ flex: '1' }}>
     <h3 style={{ fontSize: '13px', fontWeight: '800', marginBottom: '25px', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Shop</h3>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -1038,7 +1038,7 @@ const handleSubscribe = async () => {
     </div>
   </div>
 
-            {/* SUPPORT SECTION */}
+           
 <div style={{ flex: '1' }}>
   <h3 style={{ 
     fontSize: '13px', 
@@ -1071,7 +1071,7 @@ const handleSubscribe = async () => {
 </div>
 </div>
 
-          {/* 4. NEWSLETTER  */}
+          
           <div style={{ flex: isMobile ? '1 1 100%' : '1 1 320px' }}>
             <h3 style={{ fontSize: '11px', fontWeight: '800', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.3em', color: '#644747' }}>
               Join our community

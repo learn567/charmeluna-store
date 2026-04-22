@@ -5,7 +5,6 @@ import { Search, User, ShoppingBag, Menu, X, ChevronDown, Mail, MessageCircle } 
 import { motion, AnimatePresence } from "framer-motion";
 import { createClient } from '@supabase/supabase-js';
 
-// Supabase Client Setup
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -19,7 +18,6 @@ export default function Contact() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // --- FORM STATES & LOGIC ---
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
@@ -57,7 +55,7 @@ export default function Contact() {
       if (error) throw error;
 
       setStatus("success");
-      setFormData({ name: "", email: "", message: "" }); // Form clear kar dein
+      setFormData({ name: "", email: "", message: "" }); 
     } catch (error) {
       console.error("Error sending inquiry:", error);
       setStatus("error");
@@ -174,7 +172,6 @@ export default function Contact() {
         </div>
       </header>
 
-      {/* 5. SIDE CART DRAWER */}
       <AnimatePresence>
         {isCartOpen && (
           <>
@@ -204,12 +201,11 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* LUXURY CONTACT SECTION */}
+      {/*  CONTACT SECTION */}
       <section style={{ paddingTop: isMobile ? "120px" : "160px", paddingBottom: "100px", background: "radial-gradient(circle at top right, #fef8fc, #ffffff)" }}>
         <div className="max-w-[1200px] mx-auto px-6">
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.2fr 1.8fr", gap: "40px", backgroundColor: "#fff", borderRadius: "30px", boxShadow: "0 25px 50px -12px rgba(103, 94, 94, 0.08)", overflow: "hidden", border: "1px solid #f1f0ed" }}>
             
-            {/* LEFT SIDE: BRANDING & INFO */}
             <div style={{ backgroundColor: "#67645e", padding: isMobile ? "40px 30px" : "60px", color: "#f1f0ed", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>
                 <h2 style={{ fontFamily: '"Gowun Batang", serif', fontSize: "36px", marginBottom: "20px" }}>Let’s Connect</h2>
@@ -234,7 +230,7 @@ export default function Contact() {
               <div style={{ marginTop: "40px", paddingTop: "30px", borderTop: "1px solid rgba(255,255,255,0.1)" }}><p style={{ fontSize: "12px", opacity: 0.6 }}>Follow our journey on Instagram @charmeluna</p></div>
             </div>
 
-            {/* RIGHT SIDE: MODERN FORM */}
+           
             <div style={{ padding: isMobile ? "40px 25px" : "60px", backgroundColor: "#ffffff" }}>
               <h3 style={{ fontFamily: '"Gowun Batang", serif', fontSize: "24px", color: "#67645e", marginBottom: "30px" }}>Send a Message</h3>
               <form className="space-y-5" onSubmit={handleSubmit}>

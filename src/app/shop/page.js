@@ -13,10 +13,8 @@ export default function Shop() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   
-  // FAQ state
   const [openIndex, setOpenIndex] = useState(null);
 
-  // FOOTER states (Jo miss ho rahi thin)
   const [email, setEmail] = useState(""); 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -31,7 +29,6 @@ export default function Shop() {
     }, 1000);
   };
 
-  // ... (Baaqi ka useEffect aur return code)
 
   useEffect(() => {
     setIsMounted(true);
@@ -156,11 +153,9 @@ export default function Shop() {
         </div>
       </header>
 
-      {/* 5. SIDE CART DRAWER (CLEAN DESIGN) */}
       <AnimatePresence>
         {isCartOpen && (
           <>
-            {/* Background Blur Overlay */}
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
@@ -169,7 +164,6 @@ export default function Shop() {
               className="fixed inset-0 bg-black/20 z-[999] backdrop-blur-[2px]"
             />
 
-            {/* Drawer Panel */}
             <motion.div 
               initial={{ x: "100%" }} 
               animate={{ x: 0 }} 
@@ -180,13 +174,11 @@ export default function Shop() {
             >
               <div className="flex-1 flex flex-col p-6 md:p-10">
                 
-                {/* Header Section - Underline Hatadi hai */}
                 <div className="flex justify-between items-start mb-12">
                   <div>
                     <h3 style={{ fontFamily: 'Swiss, sans-serif' }} className="text-[#8f645e] uppercase tracking-[0.3em] font-bold text-[14px]">
                       Your Bag
                     </h3>
-                    {/* Yahan se line delete kardi */}
                   </div>
                   <button 
                     onClick={() => setIsCartOpen(false)} 
@@ -196,7 +188,6 @@ export default function Shop() {
                   </button>
                 </div>
 
-                {/* Empty State Section */}
                 <div className="flex-1 flex flex-col items-center justify-center border border-[#f1f0ed] rounded-[20px] bg-white/50 px-6 py-10 shadow-sm">
                   <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-inner border border-[#f1f0ed]">
                     <ShoppingBag size={20} className="text-[#d3beab]" />
@@ -206,9 +197,6 @@ export default function Shop() {
                     Your bag is currently empty
                   </p>
                   
-                  
-                  
-                  {/* Shop Now / Continue Shopping Button - Hover Color Fixed */}
                   <button 
                     onClick={() => setIsCartOpen(false)} 
                     className="w-full max-w-[240px] py-4 border border-[#67645e] text-[#8f645e] text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-[#67645e] hover:text-[#8f645e] transition-colors duration-300 rounded-full"

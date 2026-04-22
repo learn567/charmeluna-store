@@ -68,7 +68,6 @@ const [submitting, setSubmitting] = useState(false);
     setError("");
     setStatusResult(null);
 
-    // .ilike use karne se Case-Sensitivity ka masla hal ho jata hai
     const { data, error } = await supabase
       .from('track') 
       .select('*')
@@ -78,9 +77,9 @@ const [submitting, setSubmitting] = useState(false);
       console.error("Supabase Error:", error);
       setError("Something went wrong. Try again.");
     } else if (data && data.length > 0) {
-      setStatusResult(data[0]); // Pehla result mil gaya!
+      setStatusResult(data[0]); 
     } else {
-      setError("NO ORDER FOUND WITH THIS ID."); // Agar ID match na ho
+      setError("NO ORDER FOUND WITH THIS ID."); 
     }
     setLoading(false);
   };
@@ -89,11 +88,9 @@ const handleSubscribe = async (e) => {
     if (!email) return;
 
     setSubmitting(true);
-    setError(""); // Purana error clear karne ke liye
+    setError(""); 
 
     try {
-      // Filhal hum sirf success message dikha rahe hain
-      // Aap baad mein yahan Supabase ka logic add kar sakte hain
       setTimeout(() => {
         setMessage("THANK YOU FOR SUBSCRIBING!");
         setEmail("");
@@ -323,7 +320,7 @@ const handleSubscribe = async (e) => {
 
 
 
-      {/* 5. SIDE CART DRAWER (CLEAN DESIGN) */}
+       
 
       <AnimatePresence>
 
@@ -331,7 +328,7 @@ const handleSubscribe = async (e) => {
 
           <>
 
-            {/* Background Blur Overlay */}
+            
 
             <motion.div
 
@@ -349,7 +346,7 @@ const handleSubscribe = async (e) => {
 
 
 
-            {/* Drawer Panel */}
+           
 
             <motion.div
 
@@ -371,7 +368,7 @@ const handleSubscribe = async (e) => {
 
                
 
-                {/* Header Section - Underline Hatadi hai */}
+               
 
                 <div className="flex justify-between items-start mb-12">
 
@@ -382,8 +379,6 @@ const handleSubscribe = async (e) => {
                       Your Bag
 
                     </h3>
-
-                    {/* Yahan se line delete kardi */}
 
                   </div>
 
@@ -403,7 +398,7 @@ const handleSubscribe = async (e) => {
 
 
 
-                {/* Empty State Section */}
+                
 
                 <div className="flex-1 flex flex-col items-center justify-center border border-[#f1f0ed] rounded-[20px] bg-white/50 px-6 py-10 shadow-sm">
 
@@ -427,7 +422,7 @@ const handleSubscribe = async (e) => {
 
                  
 
-                  {/* Shop Now / Continue Shopping Button - Hover Color Fixed */}
+                  
 
                   <button
 
@@ -476,11 +471,8 @@ const handleSubscribe = async (e) => {
       </div>
 
 <div style={{ clear: 'both', height: isMobile ? '50px' : '100px', width: '100%' }}></div>
-      {/* 6. GUARANTEED ALIGNMENT TRACKING SECTION */}
 <section className="w-full flex justify-center px-4 md:px-12 py-32 bg-white" style={{ fontFamily: 'Swiss, sans-serif' }}>
   <div className="w-full max-w-[800px] flex flex-col items-center">
-    
-    {/* Centered Heading */}
     <div className="text-center mb-16">
       <h2 
         style={{ fontFamily: 'Gowun Batang, serif', letterSpacing: '0.02em' }} 
@@ -490,17 +482,13 @@ const handleSubscribe = async (e) => {
       </h2>
       <div style={{ width: '80px', height: '1.5px', backgroundColor: '#d3beab', margin: '32px auto 0', opacity: '0.4' }}></div>
     </div>
-
-    {/* Form */}
     <form 
       onSubmit={handleTrackOrder} 
       className="w-full flex flex-col items-center"
       style={{ maxWidth: '500px' }}
     >
-      {/* 1. TOP LINE */}
       <div style={{ width: '100%', height: '1px', backgroundColor: '#d3beab', opacity: '0.5' }}></div>
 
-      {/* 2. INPUT AREA */}
       <input 
         value={trackingId}
         onChange={(e) => setTrackingId(e.target.value)}
@@ -510,14 +498,12 @@ const handleSubscribe = async (e) => {
         className="w-full bg-transparent text-center text-xl md:text-2xl text-[#67645e] outline-none border-none placeholder:text-[#d3beab]/30 tracking-[0.3em] uppercase font-light"
         style={{ fontFamily: 'Swiss, sans-serif', padding: '40px 0' }}
       />
-      
-      {/* 3. BOTTOM LINE */}
+    
       <div style={{ width: '100%', height: '1px', backgroundColor: '#d3beab', opacity: '0.5' }}></div>
 
-      {/* 4. SPACE */}
+     
       <div style={{ height: '40px', width: '100%' }}></div> 
 
-      {/* 5. BUTTON */}
       <button 
         type="submit"
         className="relative group overflow-hidden transition-all duration-700 ease-in-out"
@@ -537,7 +523,7 @@ const handleSubscribe = async (e) => {
         <span className="absolute inset-0 bg-[#8f645e]/5 translate-y-full group-hover:translate-y-0 transition-transform duration-700"></span>
       </button>
 
-{/* Result Section - Sab ko Current Status jaisa bold aur clear kar diya hai */}
+
 <div className="w-full flex flex-col items-center min-h-[150px]"> 
   {error && (
     <p className="mt-12 text-[#8f645e] tracking-[0.2em] text-[11px] uppercase font-bold" style={{ fontFamily: 'Swiss, sans-serif' }}>
@@ -552,10 +538,10 @@ const handleSubscribe = async (e) => {
       className="mt-16 w-full bg-white text-center"
       style={{ fontFamily: 'Swiss, sans-serif' }}
     >
-      {/* Minimal Separator */}
+     
       <div className="w-[40px] h-[1px] bg-[#d3beab] mx-auto mb-10 opacity-60"></div>
       
-      {/* 1. Current Status */}
+  
       <p className="text-[9px] uppercase tracking-[0.6em] text-[#d3beab] mb-6 font-bold">
         Current Status
       </p>
@@ -567,14 +553,12 @@ const handleSubscribe = async (e) => {
         {statusResult.status}
       </h3>
       
-      {/* 2. Tracking ID & Customer Name Section */}
+     
       <div className="flex flex-col gap-4">
-        {/* Tracking ID - Same style as Current Status */}
         <p className="text-[9px] uppercase tracking-[0.6em] text-[#d3beab] font-bold">
           Tracking ID: <span className="text-[#67645e]">{statusResult.tracking_id}</span>
         </p>
         
-        {/* Customer Name Display - Same style as Current Status */}
         {statusResult.customer_name && (
           <p className="text-[9px] uppercase tracking-[0.6em] text-[#d3beab] font-bold">
             Name: <span className="text-[#67645e]">{statusResult.customer_name}</span>
