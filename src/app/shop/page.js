@@ -235,7 +235,7 @@ export default function Shop() {
 
       {/* FOOTER SECTION */}
       <footer style={{ 
-        backgroundColor: '#fef8fc', 
+        backgroundColor: '#eaeaea', 
         color: '#644747', 
         padding: isMobile ? '30px 20px 20px 20px' : '50px 80px 40px 80px', 
         fontFamily: "'Swiss', sans-serif",
