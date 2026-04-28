@@ -35,36 +35,36 @@ const [isCartOpen, setIsCartOpen] = useState(false);
   {
     name: "CHERRY RED",
     tagline: "limited edition style",
-    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Cherry%20Red.webp?width=800&quality=70",
+    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Cherry_Red.webp?width=800&quality=70",
     rightImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Cherry%20Red%20Shade.webp?width=800&quality=70",
     count: "1/5"
   },
   {
     name: "BEIGE NUDE",
     tagline: "natural glow style",
-    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Beige%20Nude.webp?width=800&quality=70",
+    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Beige_Nude.webp?width=800&quality=70",
     rightImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Beige%20Nude%20shade.webp?width=800&quality=70",
     count: "2/5"
   },
   {
     name: "CLASSIC RED",
     tagline: "the original style",
-    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Classic%20Red.webp?width=800&quality=70",
+    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Classic_Red.webp?width=800&quality=70",
     rightImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/classic%20red%20shade.webp?width=800&quality=70",
     count: "3/5"
   },
   {
     name: "CRIMSON",
     tagline: "the original style",
-    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Crimson.webp?width=800&quality=70",
+    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/Crimsson.webp?width=800&quality=70",
     rightImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/crimson%20shade.webp?width=800&quality=70",
     count: "4/5"
   },
   {
     name: "NUDE BROWN",
     tagline: "the original style",
-    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/nude%20brown%20shade.webp?width=800&quality=70",
-    rightImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/nude%20brown.webp?width=800&quality=70",
+    leftImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/nude_brown.webp?width=800&quality=70",
+    rightImg: "https://hvxgbzvogvhrcjzqmydg.supabase.co/storage/v1/object/public/product-images/nude%20brown%20shade.webp?width=800&quality=70",
     count: "5/5"
   }
 ];
