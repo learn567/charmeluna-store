@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link"; 
 import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+// 1. Supabase client import karein
+import { supabase } from "../../../libsupabase";
 
 export default function Shop() {
   const [isMounted, setIsMounted] = useState(false);
@@ -19,6 +21,10 @@ export default function Shop() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  // 2. Products ke liye states
+  const [products, setProducts] = useState([]);
+  const [isProductsLoading, setIsProductsLoading] = useState(true);
+
   const handleSubscribe = () => {
     if (!email) return;
     setLoading(true);
@@ -29,10 +35,28 @@ export default function Shop() {
     }, 1000);
   };
 
-
   useEffect(() => {
     setIsMounted(true);
     setWindowWidth(window.innerWidth);
+
+    // 3. Data fetch karne ka function
+    const fetchProducts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*');
+        
+        if (error) throw error;
+        setProducts(data || []);
+      } catch (error) {
+        console.error("Error fetching products:", error.message);
+      } finally {
+        setIsProductsLoading(false);
+      }
+    };
+
+    fetchProducts();
+
     const handleResize = () => setWindowWidth(window.innerWidth);
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
 
@@ -204,9 +228,6 @@ export default function Shop() {
                     Shop Now
                   </button>
                 </div>
-
-                
-
               </div>
             </motion.div>
           </>
@@ -220,6 +241,92 @@ export default function Shop() {
           {!isScrolled && <div className="absolute inset-0 bg-black/15 pointer-events-none" />}
         </div>
       </div>
+
+      {/* 5. HIGH-STREET FUNCTIONAL GRID */}
+      <section style={{ padding: isMobile ? '40px 20px' : '100px 100px', maxWidth: '1600px', margin: '0 auto', backgroundColor: '#fff' }}>
+        
+        {/* Header - Simple & Clean */}
+        <div style={{ marginBottom: '60px', borderLeft: '3px solid #b3848f', paddingLeft: '20px' }}>
+          <h2 style={{ fontFamily: 'Swiss, sans-serif', fontSize: isMobile ? '28px' : '40px', fontWeight: '900', color: '#644747', textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
+            The Muse Collection
+          </h2>
+        </div>
+
+        {isProductsLoading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '100px 0' }}>
+            <div style={{ width: '25px', height: '25px', border: '2px solid #f1f0ed', borderTopColor: '#b3848f', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+          </div>
+        ) : (
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', 
+            columnGap: isMobile ? '12px' : '30px', 
+            rowGap: '60px'
+          }}>
+            {products.map((product) => (
+              <div key={product.id} className="group" style={{ position: 'relative' }}>
+                
+                {/* Image Area - No Shadow, Pure Cleanliness */}
+                <div 
+                  onClick={() => window.location.href = `/checkout?id=${product.id}`}
+                  style={{ 
+                    position: 'relative', 
+                    width: '100%',
+                    aspectRatio: '1/1.2',
+                    overflow: 'hidden',
+                    backgroundColor: '#fbfaf9',
+                    cursor: 'pointer',
+                    borderRadius: '2px' // Sharp Figma look
+                  }}
+                >
+                  <img 
+                    src={product.image_url} 
+                    alt={product.name}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }}
+                    className="group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Info & Action Area */}
+                <div style={{ marginTop: '15px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <h3 style={{ fontFamily: 'Swiss, sans-serif', fontSize: '13px', fontWeight: '800', textTransform: 'uppercase', color: '#644747' }}>
+                      {product.name}
+                    </h3>
+                    <span style={{ fontFamily: 'Swiss, sans-serif', fontSize: '14px', color: '#b3848f', fontWeight: '400' }}>
+                      Rs. {product.price.toLocaleString()}
+                    </span>
+                  </div>
+
+                  {/* BUY NOW BUTTON - ALWAYS VISIBLE OR SLIDE UP */}
+                  <button 
+                    onClick={() => window.location.href = `/checkout?id=${product.id}`}
+                    style={{
+                      width: '100%',
+                      marginTop: '15px',
+                      padding: '12px',
+                      backgroundColor: '#f6f6f6', // Deep Cocoa color
+                      color: '#836767',
+                      fontFamily: 'Swiss, sans-serif',
+                      fontSize: '11px',
+                      fontWeight: '800',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.15em',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'background-color 0.3s ease'
+                    }}
+                    onMouseOver={(e) => e.target.style.backgroundColor = '#f6f6f6'}
+                    onMouseOut={(e) => e.target.style.backgroundColor = '#f6f6f6'}
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
 
       {/* FOOTER SECTION */}
       <footer style={{ 
@@ -347,6 +454,6 @@ export default function Shop() {
           <div>© 2026 CHARMELUNA STORE. All rights reserved.</div>
         </div>
       </footer>
-     </main>
+    </main>
   );
-}   
+}
