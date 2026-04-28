@@ -5,6 +5,7 @@ import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 // 1. Supabase client import karein
 import { supabase } from "../../../libsupabase";
+export const dynamic = 'force-dynamic';
 
 export default function Shop() {
   const [isMounted, setIsMounted] = useState(false);
@@ -41,19 +42,21 @@ export default function Shop() {
 
     // 3. Data fetch karne ka function
     const fetchProducts = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*');
-        
-        if (error) throw error;
-        setProducts(data || []);
-      } catch (error) {
-        console.error("Error fetching products:", error.message);
-      } finally {
-        setIsProductsLoading(false);
-      }
-    };
+  try {
+    setIsProductsLoading(true);
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false }); // Naya product pehle dikhega
+
+    if (error) throw error;
+    setProducts(data || []);
+  } catch (error) {
+    console.error("Error fetching products:", error.message);
+  } finally {
+    setIsProductsLoading(false);
+  }
+};
 
     fetchProducts();
 
