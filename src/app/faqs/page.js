@@ -228,7 +228,7 @@ export default function FAQS() {
 
       {/* 4. MAIN BANNER */}
       <div className="w-full flex justify-center px-4 md:px-12 mt-1 md:mt-2">
-        <div className="relative overflow-hidden rounded-[8px] md:rounded-[10px] mx-auto" style={{ height: isMobile ? "300px" : "600px", width: isMobile ? "95%" : "100%", maxWidth: "1280px" }}>
+        <div className="relative overflow-hidden rounded-[8px] md:rounded-[10px] mx-auto" style={{ height: isMobile ? "200px" : "570px", width: isMobile ? "95%" : "100%", maxWidth: "1280px" }}>
           <img src="/images/faqbg.webp" alt="Main Banner" className="w-full h-full object-cover block shadow-sm" />
           {!isScrolled && <div className="absolute inset-0 bg-black/15 pointer-events-none" />}
         </div>
