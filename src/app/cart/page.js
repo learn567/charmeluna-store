@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 
+// Ye function ka naam CartPage hai aur niche hum isay export kar rahe hain
 export default function CartPage() {
   return (
     <div style={{ 
@@ -10,45 +11,29 @@ export default function CartPage() {
       alignItems: 'center', 
       justifyContent: 'center', 
       backgroundColor: '#fff',
-      padding: '20px'
+      padding: '20px',
+      fontFamily: 'sans-serif'
     }}>
-      <h1 style={{ 
-        fontFamily: 'Swiss, sans-serif', 
-        fontSize: '40px', 
-        fontWeight: '900', 
-        color: '#644747', 
-        textTransform: 'uppercase' 
-      }}>
-        Your Cart
+      <h1 style={{ fontWeight: '900', color: '#644747', textTransform: 'uppercase' }}>
+        Shopping Cart
       </h1>
-      <p style={{ 
-        fontFamily: 'Swiss, sans-serif', 
-        fontSize: '12px', 
-        color: '#b3848f', 
-        letterSpacing: '0.2em', 
-        textTransform: 'uppercase', 
-        marginTop: '10px' 
-      }}>
+      <p style={{ color: '#b3848f', marginTop: '10px' }}>
         Your cart is currently empty.
       </p>
       
       <button 
         onClick={() => window.location.href = '/shop'}
         style={{
-          marginTop: '40px',
-          padding: '15px 40px',
+          marginTop: '30px',
+          padding: '12px 30px',
           backgroundColor: '#644747',
           color: '#fff',
           border: 'none',
-          fontFamily: 'Swiss, sans-serif',
-          fontSize: '11px',
-          fontWeight: '900',
-          textTransform: 'uppercase',
-          letterSpacing: '0.2em',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          fontWeight: 'bold'
         }}
       >
-        Return to Shop
+        Go Back to Shop
       </button>
     </div>
   );
