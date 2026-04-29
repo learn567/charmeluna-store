@@ -1,9 +1,24 @@
-export default function Cart() {
+// src/app/cart/page.js mein ye logic use karein
+"use client";
+import { useState, useEffect } from "react";
+
+export default function CartPage() {
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartItems(data);
+  }, []);
+
   return (
-    <div style={{ padding: '100px', textAlign: 'center', fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: '#644747' }}>SHOPPING CART</h1>
-      <p>Your cart is empty.</p>
-      <a href="/shop" style={{ color: '#b3848f', textDecoration: 'underline' }}>Back to Shop</a>
+    <div>
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty</p>
+      ) : (
+        cartItems.map(item => (
+          <div key={item.id}>{item.name} - Rs. {item.price}</div>
+        ))
+      )}
     </div>
   );
 }

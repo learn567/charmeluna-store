@@ -33,6 +33,22 @@ export default function Toner() {
       setEmail("");
     }, 1000);
   };
+  const addToCart = (product) => {
+  // Local storage se purana cart uthayein ya khali array
+  const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  
+  // Check karein product pehle se to nahi hai
+  const isProductInCart = existingCart.find(item => item.id === product.id);
+  
+  if (!isProductInCart) {
+    const updatedCart = [...existingCart, { ...product, quantity: 1 }];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    // Cart drawer open karne ke liye
+    setIsCartOpen(true);
+  } else {
+    setIsCartOpen(true);
+  }
+};
 
   useEffect(() => {
     setIsMounted(true);
@@ -267,25 +283,39 @@ const fetchProducts = async () => {
               <div key={product.id} className="group" style={{ position: 'relative' }}>
                 
                 {/* Image Area - No Shadow, Pure Cleanliness */}
-                <div 
-                  onClick={() => window.location.href = `/checkout?id=${product.id}`}
-                  style={{ 
-                    position: 'relative', 
-                    width: '100%',
-                    aspectRatio: '1/1.2',
-                    overflow: 'hidden',
-                    backgroundColor: '#fbfaf9',
-                    cursor: 'pointer',
-                    borderRadius: '2px' // Sharp Figma look
-                  }}
-                >
-                  <img 
-                    src={product.image_url} 
-                    alt={product.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }}
-                    className="group-hover:scale-105"
-                  />
-                </div>
+<div 
+  onClick={() => window.location.href = `/checkout?id=${product.id}`}
+  style={{ 
+    position: 'relative', 
+    width: '100%',
+    aspectRatio: '1/1.2',
+    overflow: 'hidden',
+    backgroundColor: '#fbfaf9',
+    cursor: 'pointer',
+    borderRadius: '2px' 
+  }}
+  className="relative group" // "group" class yahan hona lazmi hai hover ke liye
+>
+  <img 
+    src={product.image_url} 
+    alt={product.name}
+    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.8s ease' }}
+    className="group-hover:scale-105"
+  />
+
+  {/* --- ADD TO CART HOVER ICON --- */}
+  <div 
+    onClick={(e) => {
+      e.stopPropagation(); // Ye line checkout page par jane se rokegi jb icon click hoga
+      addToCart(product); // Step 1 wala function yahan call hoga
+    }}
+    className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center"
+  >
+    <div className="bg-white/90 p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-white">
+      <ShoppingBag size={20} style={{ color: "#8f645e" }} />
+    </div>
+  </div>
+</div>
 
                 {/* Info & Action Area */}
                 <div style={{ marginTop: '15px' }}>
