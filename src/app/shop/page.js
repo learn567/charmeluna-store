@@ -4,8 +4,7 @@ import Link from "next/link";
 import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 // 1. Supabase client import karein
-import { supabase } from "../../../libsupabase";
-
+import { supabase } from "@/supabase";
 
 export default function Shop() {
   const [isMounted, setIsMounted] = useState(false);
